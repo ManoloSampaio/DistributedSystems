@@ -1,4 +1,4 @@
-# Distributed Systems:
+# Distributed Systems
 ### Students
 * Emmanuel Sampaio
 * Carlos Alfredo 
