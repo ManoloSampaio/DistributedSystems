@@ -3,7 +3,6 @@ from _thread import *
 import threading 
 import json
   
-print_lock = threading.Lock() 
 def add_users_tread(server):
     print("Conectando Usuarios")
     while True:
