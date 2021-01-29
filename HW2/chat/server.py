@@ -13,17 +13,20 @@ def add_users_tread(server):
         nickname = eval(mensagem.decode())['nickname']
         server.nicknames.append(nickname)
         start_new_thread(listen_thread,(server,connection))
-        server.send_mensage(json.dumps({'mensagem':f'{nickname} Entrou No Servidor',
+        server.send_mensage(json.dumps({'mensagem':f'{nickname} entrou no servidor',
                         'nickname':'Server'}).encode())
         
 def listen_thread(server,connection):
     while True:
         mensagem=connection.recv(1024)
-        value = verify_mensage(server,connection,mensagem)
-        if value==1:
-            server.send_mensage(mensagem)
-        if value==2:
+        if not mensagem:
             connection.close()
+        else:
+            value = server.verify_mensage(connection,mensagem)
+            if value==1:
+                server.send_mensage(mensagem)
+            if value==2:
+                connection.close()
 
 server = ChatServer()
 

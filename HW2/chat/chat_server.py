@@ -1,35 +1,44 @@
-from chat_sala import ChatRoom
 import json
 import socket
 from _thread import *
 
 class ChatServer():
-    """[summary]
+    """
+    Server Class. This class is related to the Server of the chat app.
+    It contains the methods to send receive mensages and also list the users.
     """
     def __init__(self):
         """
-        
+        Initialization of the server,
+        1. Server_socket is the socket of the server.
+        2. Connection_vector is the vector that 
+        contains the sockets associated with each different client. 
         """
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.connection_vector = []
         self.nicknames = []
         
     def send_mensage(self,mensagem):
-        """[summary]
-
+        """
+        Methods associated with send the mensage
+        for all clients.
         Args:
-            mensagem ([type]): [description]
+            mensagem (encoded string): 
         """
         for connection in self.connection_vector:
             connection.send(mensagem)
     
-    def list_nicknames(self):
-        """[summary]
+    def list_nicknames(self,connection):
+        """
+        List the nicknames for the user that asks for it.
 
         Returns:
             [type]: [description]
         """
-        return self.nicknames
+        connection.send(json.dumps(
+                        {'mensagem':str(self.nicknames),
+                        'nickname':'Server'}
+                        ).encode())
     
     def remove_user(self,connection_user):
         """[summary]
@@ -46,7 +55,7 @@ class ChatServer():
                 nickname = self.nicknames.pop(i)
                 return nickname
     
-    def verify_mensage(connection,mensagem):
+    def verify_mensage(self,connection,mensagem):
         """[summary]
 
         Args:
@@ -57,17 +66,19 @@ class ChatServer():
             [type]: [description]
         """
         msg=eval(mensagem.decode())['mensagem']
+        
         if msg=='/USUARIOS':
-            connection.send(json.dumps({'mensagem':str(server.list_nicknames()),
-                            'nickname':'Server'}).encode())
+            self.list_nicknames(connection)
             return 0
+        
         if msg=='/SAIR':
             connection.send(json.dumps({
-                                'mensagem':'SAIU',
-                                'nickname':'Server'}).encode())
+                            'mensagem':'SAIU',
+                            'nickname':'Server'}).encode())
+            
             nickname = self.remove_user(connection)
-            print(nickname)
-            server.send_mensage(json.dumps({
+            
+            self.send_mensage(json.dumps({
                                 'mensagem':f'{nickname} saiu do chat',
                                 'nickname':'Server'}).encode())
             return 2

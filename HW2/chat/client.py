@@ -6,8 +6,11 @@ import time
 def listen_mensage(client):
     while True:
         mensage =client.rec_mensage()
-        print("User: "+eval(mensage)['nickname']+" Mensagem: "+eval(mensage)['mensagem'])
+        print("User: "+eval(mensage)['nickname']+
+              " Mensagem: "+eval(mensage)['mensagem'])
+        
         if eval(mensage)['mensagem']=='SAIU':
+            client.client_socket.close()
             break
     
 def send_mensage(client):
@@ -17,20 +20,23 @@ def send_mensage(client):
         if mensagem=='/SAIR':
             break
 
-nickname =input('Digite o seu nickname: ')
-server_ip = '127.0.0.1'
-server_port = 65432
-client = ChatClient(nickname,server_ip,server_port)
-#start_new_thread(listen_mensage,(client,))
+user_input = input()
+if user_input =='/ENTRAR':
+    nickname =input('Digite o seu nickname: ')
+    server_ip = '127.0.0.1'
+    server_port = 65432
+    # Porta: 65432
+    #local_host: '127.0.0.1'
+    client = ChatClient(nickname,server_ip,server_port)
 
-print("Conectando com o servidor")
+    print("Conectando com o servidor")
 
-t_1 = threading.Thread(target=send_mensage, args=(client,))
-t_2 = threading.Thread(target=listen_mensage, args=(client,))
+    t_1 = threading.Thread(target=send_mensage, args=(client,))
+    t_2 = threading.Thread(target=listen_mensage, args=(client,))
 
-t_1.start()
+    t_1.start()
 
-t_2.start()
+    t_2.start()
 
     
 
