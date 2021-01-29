@@ -73,7 +73,7 @@ class ChatServer():
         
         if msg=='/SAIR':
             connection.send(json.dumps({
-                            'mensagem':'SAIU',
+                            'mensagem':'Você foi desconectado da sala de chat',
                             'nickname':'Server'}).encode())
             
             nickname = self.remove_user(connection)

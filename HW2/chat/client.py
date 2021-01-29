@@ -6,10 +6,10 @@ import time
 def listen_mensage(client):
     while True:
         mensage =client.rec_mensage()
-        print("User: "+eval(mensage)['nickname']+
-              " Mensagem: "+eval(mensage)['mensagem'])
+        print("("+eval(mensage)['nickname']+")"+
+              ": "+eval(mensage)['mensagem'])
         
-        if eval(mensage)['mensagem']=='SAIU':
+        if eval(mensage)['mensagem']=='Você foi desconectado da sala de chat':
             client.client_socket.close()
             break
     
