@@ -27,6 +27,7 @@ def listen_thread(server,connection):
                 server.send_mensage(mensagem)
             if value==2:
                 connection.close()
+                break
 
 server = ChatServer()
 
