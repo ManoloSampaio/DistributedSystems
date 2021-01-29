@@ -1,5 +1,4 @@
 from chat_user import ChatUser
-from threading import Thread
 import json
 import socket
 

@@ -15,6 +15,7 @@ def add_users_tread(server):
         start_new_thread(listen_thread,(server,connection))
         server.send_mensage(json.dumps({'mensagem':f'{nickname} Entrou No Servidor',
                         'nickname':'Server'}).encode())
+        
 def listen_thread(server,connection):
     while True:
         mensagem=connection.recv(1024)
@@ -32,5 +33,3 @@ server.server_socket.listen(1)
 t_1 = threading.Thread(target = add_users_tread(server))
 
 t_1.start()
-
-print("---CHAT TERMINOU---")
