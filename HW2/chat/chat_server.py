@@ -1,4 +1,4 @@
-from chat_sala import ChatRoom
+#from chat_sala import ChatRoom
 import json
 import socket
 from _thread import *

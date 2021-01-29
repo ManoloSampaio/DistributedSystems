@@ -19,7 +19,7 @@ def add_users_tread(server):
 def listen_thread(server,connection):
     while True:
         mensagem=connection.recv(1024)
-        value = verify_mensage(server,connection,mensagem)
+        value = server.verify_mensage(server,connection,mensagem)
         if value==1:
             server.send_mensage(mensagem)
         if value==2:
