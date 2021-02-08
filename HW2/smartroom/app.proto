@@ -1,0 +1,52 @@
+
+syntax = "proto3";
+
+message Request{
+    RequestType rtype =1;
+    GType gtype =2;
+    
+    enum GType{
+        GAMES = 0;
+        TV = 1;
+        AR = 2;
+        LAMPADA = 3;
+    }
+
+    enum RequestType{
+        ReadStatus = 0;
+        ReadSensor = 1;
+        ModStatus  = 2;
+    }
+    message ModifyStatus{
+        float value =1;
+    }
+}
+
+message Response{
+    ResponseType type =1;
+    GType gtype= 2;
+
+    enum ResponseType{
+        AddUser = 0;
+        STATUS = 1;
+        SENSOR = 2;
+    }
+    
+    enum GType{
+        GAMES = 0;
+        TV = 1;
+        AR = 2;
+        LAMPADA = 3;
+    }
+
+    message Sensor{
+        float sensor_value=1;
+    }
+
+    message Status{
+        string status =1;
+    }
+    message Add{
+        string wellcome =1;
+    }
+}
