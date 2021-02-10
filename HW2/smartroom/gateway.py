@@ -21,7 +21,8 @@ class Gateway():
         self.cast_address = (MCAST_GRP,
                             MCAST_PORT)
         print(self.cast_address)
-        self.multicastsocket.bind(self.cast_address)
+        aux = ('',MCAST_PORT)
+        self.multicastsocket.bind(aux)
         
         self.client_dict = {}
         self.object_dict = {}
