@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='gateway.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\rgateway.proto\"\xfa\x01\n\x07Request\x12#\n\x05rtype\x18\x01 \x01(\x0e\x32\x14.Request.RequestType\x12\x1f\n\x06on_off\x18\x02 \x01(\x0e\x32\x0f.Request.ON_OFF\x12\x1d\n\x05gtype\x18\x03 \x01(\x0e\x32\x0e.Request.GType\"$\n\x05GType\x12\x06\n\x02TV\x10\x00\x12\x06\n\x02\x41R\x10\x01\x12\x0b\n\x07LAMPADA\x10\x02\"I\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\x0e\n\nReadSensor\x10\x01\x12\r\n\tModStatus\x10\x02\x12\x0b\n\x07ModOnOf\x10\x03\"\x19\n\x06ON_OFF\x12\x06\n\x02ON\x10\x00\x12\x07\n\x03OFF\x10\x01\"\xc0\x01\n\x08Response\x12$\n\x04type\x18\x01 \x01(\x0e\x32\x16.Response.ResponseType\x12\x0e\n\x06status\x18\x02 \x01(\t\x12\x0e\n\x06sensor\x18\x03 \x01(\x02\x12 \n\x06on_off\x18\x04 \x01(\x0e\x32\x10.Response.ON_OFF\"1\n\x0cResponseType\x12\n\n\x06STATUS\x10\x00\x12\n\n\x06SENSOR\x10\x01\x12\t\n\x05ONOFF\x10\x02\"\x19\n\x06ON_OFF\x12\x07\n\x03OFF\x10\x00\x12\x06\n\x02ON\x10\x01\x62\x06proto3')
+  serialized_pb=_b('\n\rgateway.proto\"\xa4\x02\n\x07Request\x12#\n\x05rtype\x18\x01 \x01(\x0e\x32\x14.Request.RequestType\x12\x1f\n\x06on_off\x18\x02 \x01(\x0e\x32\x0f.Request.ON_OFF\x12\x1d\n\x05gtype\x18\x03 \x01(\x0e\x32\x0e.Request.GType\x12\x0e\n\x06status\x18\x04 \x01(\t\x12\n\n\x02ip\x18\x05 \x01(\t\x12\x0c\n\x04port\x18\x06 \x01(\x05\"$\n\x05GType\x12\x06\n\x02TV\x10\x00\x12\x06\n\x02\x41R\x10\x01\x12\x0b\n\x07LAMPADA\x10\x02\"I\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\x0e\n\nReadSensor\x10\x01\x12\r\n\tModStatus\x10\x02\x12\x0b\n\x07ModOnOf\x10\x03\"\x19\n\x06ON_OFF\x12\x07\n\x03OFF\x10\x00\x12\x06\n\x02ON\x10\x01\"\x82\x01\n\x08Response\x12$\n\x04type\x18\x01 \x01(\x0e\x32\x16.Response.ResponseType\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\x12\x0e\n\x06result\x18\x04 \x01(\t\"&\n\x0cResponseType\x12\n\n\x06STATUS\x10\x00\x12\n\n\x06SENSOR\x10\x01\":\n\x10MulticastRequest\x12\x0c\n\x04nome\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\tb\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -46,8 +46,8 @@ _REQUEST_GTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=130,
-  serialized_end=166,
+  serialized_start=172,
+  serialized_end=208,
 )
 _sym_db.RegisterEnumDescriptor(_REQUEST_GTYPE)
 
@@ -76,8 +76,8 @@ _REQUEST_REQUESTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=168,
-  serialized_end=241,
+  serialized_start=210,
+  serialized_end=283,
 )
 _sym_db.RegisterEnumDescriptor(_REQUEST_REQUESTTYPE)
 
@@ -88,18 +88,18 @@ _REQUEST_ON_OFF = _descriptor.EnumDescriptor(
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='ON', index=0, number=0,
+      name='OFF', index=0, number=0,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='OFF', index=1, number=1,
+      name='ON', index=1, number=1,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=243,
-  serialized_end=268,
+  serialized_start=285,
+  serialized_end=310,
 )
 _sym_db.RegisterEnumDescriptor(_REQUEST_ON_OFF)
 
@@ -117,39 +117,13 @@ _RESPONSE_RESPONSETYPE = _descriptor.EnumDescriptor(
       name='SENSOR', index=1, number=1,
       options=None,
       type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ONOFF', index=2, number=2,
-      options=None,
-      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=387,
-  serialized_end=436,
+  serialized_start=405,
+  serialized_end=443,
 )
 _sym_db.RegisterEnumDescriptor(_RESPONSE_RESPONSETYPE)
-
-_RESPONSE_ON_OFF = _descriptor.EnumDescriptor(
-  name='ON_OFF',
-  full_name='Response.ON_OFF',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='OFF', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ON', index=1, number=1,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=438,
-  serialized_end=463,
-)
-_sym_db.RegisterEnumDescriptor(_RESPONSE_ON_OFF)
 
 
 _REQUEST = _descriptor.Descriptor(
@@ -180,6 +154,27 @@ _REQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='status', full_name='Request.status', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ip', full_name='Request.ip', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='port', full_name='Request.port', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -196,7 +191,7 @@ _REQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=18,
-  serialized_end=268,
+  serialized_end=310,
 )
 
 
@@ -215,23 +210,23 @@ _RESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='status', full_name='Response.status', index=1,
+      name='ip', full_name='Response.ip', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='sensor', full_name='Response.sensor', index=2,
-      number=3, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      name='port', full_name='Response.port', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='on_off', full_name='Response.on_off', index=3,
-      number=4, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
+      name='result', full_name='Response.result', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -241,7 +236,6 @@ _RESPONSE = _descriptor.Descriptor(
   nested_types=[],
   enum_types=[
     _RESPONSE_RESPONSETYPE,
-    _RESPONSE_ON_OFF,
   ],
   options=None,
   is_extendable=False,
@@ -249,8 +243,53 @@ _RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=271,
-  serialized_end=463,
+  serialized_start=313,
+  serialized_end=443,
+)
+
+
+_MULTICASTREQUEST = _descriptor.Descriptor(
+  name='MulticastRequest',
+  full_name='MulticastRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='nome', full_name='MulticastRequest.nome', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ip', full_name='MulticastRequest.ip', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='port', full_name='MulticastRequest.port', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=445,
+  serialized_end=503,
 )
 
 _REQUEST.fields_by_name['rtype'].enum_type = _REQUEST_REQUESTTYPE
@@ -260,11 +299,10 @@ _REQUEST_GTYPE.containing_type = _REQUEST
 _REQUEST_REQUESTTYPE.containing_type = _REQUEST
 _REQUEST_ON_OFF.containing_type = _REQUEST
 _RESPONSE.fields_by_name['type'].enum_type = _RESPONSE_RESPONSETYPE
-_RESPONSE.fields_by_name['on_off'].enum_type = _RESPONSE_ON_OFF
 _RESPONSE_RESPONSETYPE.containing_type = _RESPONSE
-_RESPONSE_ON_OFF.containing_type = _RESPONSE
 DESCRIPTOR.message_types_by_name['Request'] = _REQUEST
 DESCRIPTOR.message_types_by_name['Response'] = _RESPONSE
+DESCRIPTOR.message_types_by_name['MulticastRequest'] = _MULTICASTREQUEST
 
 Request = _reflection.GeneratedProtocolMessageType('Request', (_message.Message,), dict(
   DESCRIPTOR = _REQUEST,
@@ -279,6 +317,13 @@ Response = _reflection.GeneratedProtocolMessageType('Response', (_message.Messag
   # @@protoc_insertion_point(class_scope:Response)
   ))
 _sym_db.RegisterMessage(Response)
+
+MulticastRequest = _reflection.GeneratedProtocolMessageType('MulticastRequest', (_message.Message,), dict(
+  DESCRIPTOR = _MULTICASTREQUEST,
+  __module__ = 'gateway_pb2'
+  # @@protoc_insertion_point(class_scope:MulticastRequest)
+  ))
+_sym_db.RegisterMessage(MulticastRequest)
 
 
 # @@protoc_insertion_point(module_scope)

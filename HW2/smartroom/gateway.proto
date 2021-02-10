@@ -3,12 +3,15 @@ message Request{
     RequestType rtype =1;
     ON_OFF on_off =2;
     GType gtype = 3;
+    string status =4;
+    string ip= 5;
+    int32 port =6;
     enum GType{
         TV = 0;
         AR = 1;
         LAMPADA = 2;
     }
-    
+
     enum RequestType{
         ReadStatus = 0;
         ReadSensor = 1;
@@ -17,27 +20,27 @@ message Request{
     }
 
     enum ON_OFF{
-        ON  = 0;
-        OFF = 1;
+        OFF  = 0;
+        ON = 1;
     }
 
 }
 
 message Response{
     ResponseType type =1;
-    string status=2;
-    float sensor =3;
-    ON_OFF on_off=4;
-    
+    string ip=2;
+    int32 port =3;
+    string result=4;
     enum ResponseType{
         STATUS = 0;
         SENSOR = 1;
-        ONOFF =2;
-    }
-    
-    enum ON_OFF{
-        OFF=0;
-        ON =1;
     }
 
 }
+
+message MulticastRequest{
+    string nome=1;
+    string ip = 2;
+    string port=3;
+}
+

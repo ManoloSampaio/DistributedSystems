@@ -5,23 +5,9 @@ import app_pb2
 from client import SmartRoomClient
 def listen_mensage(client):
     while True:
-        mensage =client.rec_mensage()
-        if mensage.type==0:
-           gagget = mensage.object_name
-           status = mensage.status
-           print(f"({gagget}):{status}")
+        mensage =client.read_mensage()
+        print(f"({mensage.object_name}):{mensage.result}")
         
-        if mensage.type==1:
-           gagget = mensage.object_name
-           sensor = mensage.Sensor.sensor_value
-           print(f"({gagget}):{sensor}")
-
-        if mensage.type==2:
-           gagget = mensage.object_name
-           on_off = mensage.on_off
-           print(f"({gagget}):{on_off}")
-
-    
 def send_mensage(client):
     print("Enviar Mensagem")
     while True:    

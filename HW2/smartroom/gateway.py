@@ -2,7 +2,7 @@ import socket
 import struct
 import sys
 import gateway_pb2
-
+#import app_pb2
 class Gateway():
     def __init__(self,ip_multicast,port_multicast):
         MCAST_GRP = ip_multicast
@@ -18,39 +18,43 @@ class Gateway():
                                       socket.SO_REUSEADDR,1 
                                       )
         
-        self.cast_adress = (MCAST_GRP,
+        self.cast_address = (MCAST_GRP,
                             MCAST_PORT)
+        print(self.cast_address)
+        self.multicastsocket.bind(self.cast_address)
         
-        self.gaggets_vector = []
-        self.gaggets_ip = []
+        self.client_dict = {}
+        self.object_dict = {}
                 
-        self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server_socket_1 = socket.socket(socket.AF_INET, 
+                                             socket.SOCK_STREAM)
+        
+        self.server_socket_2 = socket.socket(socket.AF_INET, 
+                                             socket.SOCK_STREAM)
     
-    def get_status(self,gtype):
-        mensagem=gateway_pb2.Request()
-        mensage.gtype = gtype
-        mensage.rtype = gateway_pb2.Request().RequestType().ReadStatus
-        self.multicastsocket.send(mensagem.SerializeToString())
-        gagget_response = self.multicastsocket.recv(1024)
-        
-    def set_status(self,gtype):
-            
-    def find_dispositivos(self):
-        mensage = json.dumps({'mensagem':'IDENTIFIQUE',
-                               'origin':'Server'}).encode()
-        
-        self.multicastsockt.sendto(message, 
-                                   self.cast_adress)
-    
-    def recieve_dispositivos(self):
-        mensage = self.multicastsock.recv(1024).decode()
-        
-        mensage = eval(mensagem)
-        tipo = mensage['tipo']
-        ip   = mensage['ip']
-        port = mensage['port']
-        
-        self.gaggets_vector.append(tipo)
-        self.gaggets_ip.append((ip,port))
+    def send_to_object(self,mensagem):
+        server_request = gateway_pb2.Request()
+        connection = self.mensagem.object_dict[f'{mensagem.object_name}']
+        server_request.rtype = mensagem.rtype
+        server_request.value = mensagem.value
+        server_request.ip = mensagem.ip
+        server_request.port = mensagem.port
 
-    def 
+        connection.send(server_request)
+           
+    def send_to_user(self,connection,mensagem):
+        server_response = app_pb2.Response()
+        server_response.object_name = mensagem.object_name
+        server_response.result = mensagem.result
+        connection.send(server_response) 
+        
+
+    def find_dispositivos(self):
+        mensage = gateway_pb2.MulticastRequest()
+        mensage.nome = 'server'
+        self.multicastsocket.sendto(mensage.SerializeToString(), 
+                                   self.cast_address)
+        
+        mensage.ParseFromString(self.multicastsocket.recv(1024))
+        
+        return mensage.object_name,mensage.ip,mensage.port

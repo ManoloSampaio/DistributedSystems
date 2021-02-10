@@ -6,7 +6,7 @@ class SmartRoomClient():
         self.client_socket.connect((server_ip, server_port))
         
     
-    def rec_mensage(self):
+    def read_mensage(self):
         mensagem=self.client_socket.recv(1024)
         response_object =app_pb2.Response()
         response_object.ParseFromString(mensagem)
