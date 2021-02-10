@@ -17,8 +17,11 @@ class Gadgets():
         self.cast_adress = (MCAST_GRP,
                             MCAST_PORT)
         print(self.cast_adress)
-        
-        self.multicastsocket.bind(self.cast_adress)
+        self.server_address = ('',MCAST_PORT)
+        self.multicastsocket.bind(self.server_address)
+        group = socket.inet_aton(MCAST_GRP)
+        mreq = struct.pack('4sL', group, socket.INADDR_ANY)
+        self.multicastsocket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP,mreq)
         self.ON_OFF ='ON' 
         self.nome = Nome_Dispositivo
         #self.client_socket.connect((server_ip, server_port))
@@ -37,8 +40,8 @@ class Gadgets():
         self.multicastsockt.sendto(response,self.cast_adress)
     
     def recieve_gateway(self,mensagem):
-        multicast_request= gateway_pb2.MulticasRequest()
-        multicast_request.ParseFromString(mensage)
+        multicast_request= gateway_pb2.MulticastRequest()
+        multicast_request.ParseFromString(mensagem)
         if multicast_request.nome=='server':
             print("Entrei aqui")
             self.ident()
