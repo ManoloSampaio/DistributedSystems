@@ -41,6 +41,6 @@ class Gadgets():
         multicast_request.ParseFromString(mensage)
         if multicast_request.nome=='server':
             print("Entrei aqui")
-            self.ident()
+            self.indent()
     
     
