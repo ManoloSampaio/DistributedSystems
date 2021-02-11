@@ -1,12 +1,14 @@
 
 syntax = "proto3";
 
-message Request{
+message Request_APP{
     RequestType rtype =1;
     GType gtype =2;
     string status_modification =3;    
     ON_OFF on_off=4;
-    
+    string nome = 5;
+    string ip =6;
+    int64 port=7;    
     enum GType{
         TV = 0;
         AR = 1;
@@ -27,7 +29,7 @@ message Request{
 
 }
 
-message Response{
+message Response_APP{
     string object_name =1;
     string object_result =2;
 }

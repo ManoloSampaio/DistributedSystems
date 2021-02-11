@@ -11,10 +11,11 @@ def listen_mensage(client):
 def send_mensage(client):
     print("Enviar Mensagem")
     while True:    
-        mensagem_type=input('')
         mensagem_object=input('')
-        if mensagem_type=='mod_status':
-            request_mensage.rtype = app_pb2.Request.RequestType.ModStatus
+        mensagem_type=input('')
+        request_mensage = app_pb2.Request_APP()
+        if mensagem_type=='mod':
+            request_mensage.rtype = app_pb2.Request_APP.RequestType.ModStatus
             if mensagem_object=='tv':
                 status=input('Insira o volume')
             
@@ -24,29 +25,28 @@ def send_mensage(client):
             if mensagem_object=='lampada':
                 status=input('Insira a cor da lampada')        
 
-        request_mensage = app_pb2.Request()
-        
+        request_mensage.status_modification = status
         if mensagem_type == 'sensor':
-            request_mensage.rtype = app_pb2.Request.RequestType.ReadSensor
+            request_mensage.rtype = app_pb2.Request_APP.RequestType.ReadSensor
         
         if mensagem_type == 'status':
-            request_mensage.rtype = app_pb2.Request.RequestType.ReadStatus
+            request_mensage.rtype = app_pb2.Request_APP.RequestType.ReadStatus
         
         if mensagem_type =='ligar' or mensagem_type=='desligar':
-            request_mensage.rtype = app_pb2.Request.RequestType.ModOnOf
+            request_mensage.rtype = app_pb2.Request_APP.RequestType.ModOnOf
             if mensagem_type=='ligar':
-                request_mensage.on_off= app_pb2.Request.ON_OFF.ON
+                request_mensage.on_off= app_pb2.Request_APP.ON_OFF.ON
             else:
-                request_mensage.on_off=app_pb2.Request.ON_OFF.OFF
+                request_mensage.on_off=app_pb2.Request_APP.ON_OFF.OFF
         
         if mensagem_object == 'tv':
-            request_mensage.gtype = app_pb2.Request.GType.TV
-        
+            request_mensage.gtype = app_pb2.Request_APP.GType.TV
+            request_mensage.nome = 'Televisao'
         if mensagem_object == 'ar':
-            request_mensage.gtype = app_pb2.Request.GType.AR
+            request_mensage.gtype = app_pb2.Request_APP.GType.AR
         
         if mensagem_object == 'lamp':
-            request_mensage.gtype = app_pb2.Request.GType.LAMPADA
+            request_mensage.gtype = app_pb2.Request_APP.GType.LAMPADA
         
         client.send_mensage(request_mensage.SerializeToString())
         
@@ -54,7 +54,7 @@ def send_mensage(client):
 
     
 server_ip = '127.0.0.1'
-server_port = 65432
+server_port = 65433
 
 client = SmartRoomClient(server_ip,server_port)
 print("Conectando com o servidor")

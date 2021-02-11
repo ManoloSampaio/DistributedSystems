@@ -35,13 +35,13 @@ class Gateway():
     
     def send_to_object(self,mensagem):
         server_request = gateway_pb2.Request()
-        connection = self.mensagem.object_dict[f'{mensagem.object_name}']
+        connection = self.object_dict[f'{mensagem.nome}']
         server_request.rtype = mensagem.rtype
-        server_request.value = mensagem.value
+        server_request.status = mensagem.status_modification
         server_request.ip = mensagem.ip
         server_request.port = mensagem.port
 
-        connection.send(server_request)
+        connection.send(server_request.SerializeToString())
            
     def send_to_user(self,connection,mensagem):
         server_response = app_pb2.Response()
@@ -55,7 +55,3 @@ class Gateway():
         mensage.nome = 'server'
         self.multicastsocket.sendto(mensage.SerializeToString(), 
                                    self.cast_address)
-        
-        mensage.ParseFromString(self.multicastsocket.recv(1024))
-        
-        return mensage.object_name,mensage.ip,mensage.port

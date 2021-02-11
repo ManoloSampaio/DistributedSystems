@@ -16,16 +16,19 @@ class Gadgets():
         
         self.cast_adress = (MCAST_GRP,
                             MCAST_PORT)
-        print(self.cast_adress)
+        
         self.server_address = ('',MCAST_PORT)
         self.multicastsocket.bind(self.server_address)
         group = socket.inet_aton(MCAST_GRP)
         mreq = struct.pack('4sL', group, socket.INADDR_ANY)
         self.multicastsocket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP,mreq)
-        self.ON_OFF ='ON' 
+        self.ON_OFF ='OFF' 
         self.nome = Nome_Dispositivo
-        #self.client_socket.connect((server_ip, server_port))
-    
+        self.server_ip = 'localhost'
+        self.server_port = server_port
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        
+        
     def turnon(self):
         self.ON_OFF='ON'
     
@@ -33,17 +36,22 @@ class Gadgets():
         self.ON_OFF='OFF'
     
     def indent(self):
-        response = gateway_pb2.MulticasRequest()
-        response.object_name = self.nome
-        response.ip = self.ip
-        response.port =self.port
-        self.multicastsockt.sendto(response,self.cast_adress)
+        response = gateway_pb2.MulticastRequest()
+        response.nome = self.nome
+        response.ip =   self.server_ip
+        response.port = self.server_port
+        self.socket.connect((self.server_ip, self.server_port))
+        print(response)
+        self.socket.send(response.SerializeToString())
     
     def recieve_gateway(self,mensagem):
-        multicast_request= gateway_pb2.MulticastRequest()
-        multicast_request.ParseFromString(mensagem)
-        if multicast_request.nome=='server':
-            print("Entrei aqui")
-            self.indent()
-    
-    
+        if self.ON_OFF=='OFF':
+            mensagem = self.multicastsocket.recv(1024)
+            print(mensagem)
+            response = gateway_pb2.MulticastRequest()
+            response.ParseFromString(mensagem)
+            if response.nome=='server':
+                self.ON_OFF='ON'
+                self.indent()
+        
+            

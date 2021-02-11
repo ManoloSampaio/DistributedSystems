@@ -41,6 +41,6 @@ message Response{
 message MulticastRequest{
     string nome=1;
     string ip = 2;
-    string port=3;
+    int64 port=3;
 }
 
