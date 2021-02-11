@@ -7,7 +7,7 @@ class Televisao(Gadgets):
         super().__init__(ip_multicast,port_multicast,
                        Nome_Dispositivo,server_ip,server_port)
         self.canal = 0
-        self.volume = 0
+        self.volume = '20'
     
     def set_volume(self,volume):
         self.volume = self.volume+volume

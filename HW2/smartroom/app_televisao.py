@@ -7,13 +7,14 @@ def recieve_mensage():
     print(request)
     if request.rtype == 2:
         tv.volume = request.status
-        print("Aqui")
-    response.result = tv.volume
-    tv.socket.send(response)     
+        response.result =f'Volume da TV:{tv.volume}'
+    if request.rtype == 0:
+        response.result =f'Volume da TV:{tv.volume}'
+    if request.rtype == 3:
+        tv.ON_OFF = 'OFF'
+        response.result =f'Agora A TV esta: {tv.ON_OFF}' 
         
 tv = Televisao('228.0.0.8',50000,'Televisao','127.0.0.1',65432)
-mensage = tv.multicastsocket.recv(1024)
-tv.recieve_gateway(mensage)
-print(mensage)
+
 while True:    
     recieve_mensage()

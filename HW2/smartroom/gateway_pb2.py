@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='gateway.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\rgateway.proto\"\xa4\x02\n\x07Request\x12#\n\x05rtype\x18\x01 \x01(\x0e\x32\x14.Request.RequestType\x12\x1f\n\x06on_off\x18\x02 \x01(\x0e\x32\x0f.Request.ON_OFF\x12\x1d\n\x05gtype\x18\x03 \x01(\x0e\x32\x0e.Request.GType\x12\x0e\n\x06status\x18\x04 \x01(\t\x12\n\n\x02ip\x18\x05 \x01(\t\x12\x0c\n\x04port\x18\x06 \x01(\x05\"$\n\x05GType\x12\x06\n\x02TV\x10\x00\x12\x06\n\x02\x41R\x10\x01\x12\x0b\n\x07LAMPADA\x10\x02\"I\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\x0e\n\nReadSensor\x10\x01\x12\r\n\tModStatus\x10\x02\x12\x0b\n\x07ModOnOf\x10\x03\"\x19\n\x06ON_OFF\x12\x07\n\x03OFF\x10\x00\x12\x06\n\x02ON\x10\x01\"\x82\x01\n\x08Response\x12$\n\x04type\x18\x01 \x01(\x0e\x32\x16.Response.ResponseType\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\x12\x0e\n\x06result\x18\x04 \x01(\t\"&\n\x0cResponseType\x12\n\n\x06STATUS\x10\x00\x12\n\n\x06SENSOR\x10\x01\":\n\x10MulticastRequest\x12\x0c\n\x04nome\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x03\x62\x06proto3')
+  serialized_pb=_b('\n\rgateway.proto\"\xa4\x02\n\x07Request\x12#\n\x05rtype\x18\x01 \x01(\x0e\x32\x14.Request.RequestType\x12\x1f\n\x06on_off\x18\x02 \x01(\x0e\x32\x0f.Request.ON_OFF\x12\x1d\n\x05gtype\x18\x03 \x01(\x0e\x32\x0e.Request.GType\x12\x0e\n\x06status\x18\x04 \x01(\t\x12\n\n\x02ip\x18\x05 \x01(\t\x12\x0c\n\x04port\x18\x06 \x01(\x05\"$\n\x05GType\x12\x06\n\x02TV\x10\x00\x12\x06\n\x02\x41R\x10\x01\x12\x0b\n\x07LAMPADA\x10\x02\"I\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\x0e\n\nReadSensor\x10\x01\x12\r\n\tModStatus\x10\x02\x12\x0b\n\x07ModOnOf\x10\x03\"\x19\n\x06ON_OFF\x12\x07\n\x03OFF\x10\x00\x12\x06\n\x02ON\x10\x01\"\x90\x01\n\x08Response\x12$\n\x04type\x18\x01 \x01(\x0e\x32\x16.Response.ResponseType\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\x12\x0e\n\x06result\x18\x04 \x01(\t\x12\x0c\n\x04nome\x18\x05 \x01(\t\"&\n\x0cResponseType\x12\n\n\x06STATUS\x10\x00\x12\n\n\x06SENSOR\x10\x01\":\n\x10MulticastRequest\x12\x0c\n\x04nome\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x03\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -120,8 +120,8 @@ _RESPONSE_RESPONSETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=405,
-  serialized_end=443,
+  serialized_start=419,
+  serialized_end=457,
 )
 _sym_db.RegisterEnumDescriptor(_RESPONSE_RESPONSETYPE)
 
@@ -230,6 +230,13 @@ _RESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='nome', full_name='Response.nome', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -244,7 +251,7 @@ _RESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=313,
-  serialized_end=443,
+  serialized_end=457,
 )
 
 
@@ -288,8 +295,8 @@ _MULTICASTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=445,
-  serialized_end=503,
+  serialized_start=459,
+  serialized_end=517,
 )
 
 _REQUEST.fields_by_name['rtype'].enum_type = _REQUEST_REQUESTTYPE

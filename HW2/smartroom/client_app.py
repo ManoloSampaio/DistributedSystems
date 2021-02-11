@@ -6,14 +6,15 @@ from client import SmartRoomClient
 def listen_mensage(client):
     while True:
         mensage =client.read_mensage()
-        print(f"({mensage.object_name}):{mensage.result}")
+        print(f"({mensage.object_name}):{mensage.object_result}")
         
 def send_mensage(client):
     print("Enviar Mensagem")
     while True:    
-        mensagem_object=input('')
-        mensagem_type=input('')
+        mensagem_object=input('Qual Objeto quer interagir')
+        mensagem_type=input('O que voce quer vizualizar')
         request_mensage = app_pb2.Request_APP()
+        
         if mensagem_type=='mod':
             request_mensage.rtype = app_pb2.Request_APP.RequestType.ModStatus
             if mensagem_object=='tv':
