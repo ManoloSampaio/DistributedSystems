@@ -1,30 +1,18 @@
-
 syntax = "proto3";
 
 message Request_APP{
-    RequestType rtype =1;
-    GType gtype =2;
-    string status_modification =3;    
-    ON_OFF on_off=4;
-    string nome = 5;
-    string ip =6;
-    int64 port=7;    
-    enum GType{
-        TV = 0;
-        AR = 1;
-        LAMPADA = 2;
-    }
-
+    RequestType request_type =1;
+    string value = 2;
+    string name = 3;   
+    string aux =4;
     enum RequestType{
         ReadStatus = 0;
         ReadSensor = 1;
         ModStatus  = 2;
         ModOnOf=3;
-    }
-    
-    enum ON_OFF{
-        ON =0;
-        OFF=1;
+        ListObjects = 4;
+        DiscoverComands= 5;
+        VerifyObject = 6;
     }
 
 }
@@ -32,4 +20,6 @@ message Request_APP{
 message Response_APP{
     string object_name =1;
     string object_result =2;
+    string list_object= 3;
+    int32 exists = 5;
 }

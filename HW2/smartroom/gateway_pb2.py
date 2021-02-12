@@ -19,41 +19,15 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='gateway.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\rgateway.proto\"\xa4\x02\n\x07Request\x12#\n\x05rtype\x18\x01 \x01(\x0e\x32\x14.Request.RequestType\x12\x1f\n\x06on_off\x18\x02 \x01(\x0e\x32\x0f.Request.ON_OFF\x12\x1d\n\x05gtype\x18\x03 \x01(\x0e\x32\x0e.Request.GType\x12\x0e\n\x06status\x18\x04 \x01(\t\x12\n\n\x02ip\x18\x05 \x01(\t\x12\x0c\n\x04port\x18\x06 \x01(\x05\"$\n\x05GType\x12\x06\n\x02TV\x10\x00\x12\x06\n\x02\x41R\x10\x01\x12\x0b\n\x07LAMPADA\x10\x02\"I\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\x0e\n\nReadSensor\x10\x01\x12\r\n\tModStatus\x10\x02\x12\x0b\n\x07ModOnOf\x10\x03\"\x19\n\x06ON_OFF\x12\x07\n\x03OFF\x10\x00\x12\x06\n\x02ON\x10\x01\"\x90\x01\n\x08Response\x12$\n\x04type\x18\x01 \x01(\x0e\x32\x16.Response.ResponseType\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\x12\x0e\n\x06result\x18\x04 \x01(\t\x12\x0c\n\x04nome\x18\x05 \x01(\t\"&\n\x0cResponseType\x12\n\n\x06STATUS\x10\x00\x12\n\n\x06SENSOR\x10\x01\":\n\x10MulticastRequest\x12\x0c\n\x04nome\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x03\x62\x06proto3')
+  serialized_pb=_b('\n\rgateway.proto\"\xd5\x01\n\x0eGatewayRequest\x12\x31\n\x0crequest_type\x18\x01 \x01(\x0e\x32\x1b.GatewayRequest.RequestType\x12\r\n\x05value\x18\x02 \x01(\t\x12\x14\n\x0c\x63lient_ident\x18\x03 \x01(\x05\x12\x0b\n\x03\x61ux\x18\x04 \x01(\t\"^\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\x0e\n\nReadSensor\x10\x01\x12\r\n\tModStatus\x10\x02\x12\x0b\n\x07ModOnOf\x10\x03\x12\x13\n\x0f\x44iscoverComands\x10\x05\"E\n\x0fGadgetsResponse\x12\x0e\n\x06result\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x14\n\x0c\x63lient_ident\x18\x03 \x01(\x05\"6\n\x0cGadgetsIdent\x12\x0c\n\x04nome\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x03\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
-_REQUEST_GTYPE = _descriptor.EnumDescriptor(
-  name='GType',
-  full_name='Request.GType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='TV', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='AR', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='LAMPADA', index=2, number=2,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=172,
-  serialized_end=208,
-)
-_sym_db.RegisterEnumDescriptor(_REQUEST_GTYPE)
-
-_REQUEST_REQUESTTYPE = _descriptor.EnumDescriptor(
+_GATEWAYREQUEST_REQUESTTYPE = _descriptor.EnumDescriptor(
   name='RequestType',
-  full_name='Request.RequestType',
+  full_name='GatewayRequest.RequestType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -73,105 +47,51 @@ _REQUEST_REQUESTTYPE = _descriptor.EnumDescriptor(
       name='ModOnOf', index=3, number=3,
       options=None,
       type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=210,
-  serialized_end=283,
-)
-_sym_db.RegisterEnumDescriptor(_REQUEST_REQUESTTYPE)
-
-_REQUEST_ON_OFF = _descriptor.EnumDescriptor(
-  name='ON_OFF',
-  full_name='Request.ON_OFF',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
     _descriptor.EnumValueDescriptor(
-      name='OFF', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ON', index=1, number=1,
+      name='DiscoverComands', index=4, number=5,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=285,
-  serialized_end=310,
+  serialized_start=137,
+  serialized_end=231,
 )
-_sym_db.RegisterEnumDescriptor(_REQUEST_ON_OFF)
-
-_RESPONSE_RESPONSETYPE = _descriptor.EnumDescriptor(
-  name='ResponseType',
-  full_name='Response.ResponseType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='STATUS', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='SENSOR', index=1, number=1,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=419,
-  serialized_end=457,
-)
-_sym_db.RegisterEnumDescriptor(_RESPONSE_RESPONSETYPE)
+_sym_db.RegisterEnumDescriptor(_GATEWAYREQUEST_REQUESTTYPE)
 
 
-_REQUEST = _descriptor.Descriptor(
-  name='Request',
-  full_name='Request',
+_GATEWAYREQUEST = _descriptor.Descriptor(
+  name='GatewayRequest',
+  full_name='GatewayRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='rtype', full_name='Request.rtype', index=0,
+      name='request_type', full_name='GatewayRequest.request_type', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='on_off', full_name='Request.on_off', index=1,
-      number=2, type=14, cpp_type=8, label=1,
+      name='value', full_name='GatewayRequest.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='client_ident', full_name='GatewayRequest.client_ident', index=2,
+      number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='gtype', full_name='Request.gtype', index=2,
-      number=3, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='status', full_name='Request.status', index=3,
+      name='aux', full_name='GatewayRequest.aux', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ip', full_name='Request.ip', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='port', full_name='Request.port', index=5,
-      number=6, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -180,9 +100,7 @@ _REQUEST = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _REQUEST_GTYPE,
-    _REQUEST_REQUESTTYPE,
-    _REQUEST_ON_OFF,
+    _GATEWAYREQUEST_REQUESTTYPE,
   ],
   options=None,
   is_extendable=False,
@@ -191,49 +109,35 @@ _REQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=18,
-  serialized_end=310,
+  serialized_end=231,
 )
 
 
-_RESPONSE = _descriptor.Descriptor(
-  name='Response',
-  full_name='Response',
+_GADGETSRESPONSE = _descriptor.Descriptor(
+  name='GadgetsResponse',
+  full_name='GadgetsResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='type', full_name='Response.type', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
+      name='result', full_name='GadgetsResponse.result', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ip', full_name='Response.ip', index=1,
+      name='name', full_name='GadgetsResponse.name', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='port', full_name='Response.port', index=2,
+      name='client_ident', full_name='GadgetsResponse.client_ident', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='result', full_name='Response.result', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='nome', full_name='Response.nome', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -242,7 +146,6 @@ _RESPONSE = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _RESPONSE_RESPONSETYPE,
   ],
   options=None,
   is_extendable=False,
@@ -250,34 +153,34 @@ _RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=313,
-  serialized_end=457,
+  serialized_start=233,
+  serialized_end=302,
 )
 
 
-_MULTICASTREQUEST = _descriptor.Descriptor(
-  name='MulticastRequest',
-  full_name='MulticastRequest',
+_GADGETSIDENT = _descriptor.Descriptor(
+  name='GadgetsIdent',
+  full_name='GadgetsIdent',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='nome', full_name='MulticastRequest.nome', index=0,
+      name='nome', full_name='GadgetsIdent.nome', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ip', full_name='MulticastRequest.ip', index=1,
+      name='ip', full_name='GadgetsIdent.ip', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='port', full_name='MulticastRequest.port', index=2,
+      name='port', full_name='GadgetsIdent.port', index=2,
       number=3, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -295,42 +198,36 @@ _MULTICASTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=459,
-  serialized_end=517,
+  serialized_start=304,
+  serialized_end=358,
 )
 
-_REQUEST.fields_by_name['rtype'].enum_type = _REQUEST_REQUESTTYPE
-_REQUEST.fields_by_name['on_off'].enum_type = _REQUEST_ON_OFF
-_REQUEST.fields_by_name['gtype'].enum_type = _REQUEST_GTYPE
-_REQUEST_GTYPE.containing_type = _REQUEST
-_REQUEST_REQUESTTYPE.containing_type = _REQUEST
-_REQUEST_ON_OFF.containing_type = _REQUEST
-_RESPONSE.fields_by_name['type'].enum_type = _RESPONSE_RESPONSETYPE
-_RESPONSE_RESPONSETYPE.containing_type = _RESPONSE
-DESCRIPTOR.message_types_by_name['Request'] = _REQUEST
-DESCRIPTOR.message_types_by_name['Response'] = _RESPONSE
-DESCRIPTOR.message_types_by_name['MulticastRequest'] = _MULTICASTREQUEST
+_GATEWAYREQUEST.fields_by_name['request_type'].enum_type = _GATEWAYREQUEST_REQUESTTYPE
+_GATEWAYREQUEST_REQUESTTYPE.containing_type = _GATEWAYREQUEST
+DESCRIPTOR.message_types_by_name['GatewayRequest'] = _GATEWAYREQUEST
+DESCRIPTOR.message_types_by_name['GadgetsResponse'] = _GADGETSRESPONSE
+DESCRIPTOR.message_types_by_name['GadgetsIdent'] = _GADGETSIDENT
 
-Request = _reflection.GeneratedProtocolMessageType('Request', (_message.Message,), dict(
-  DESCRIPTOR = _REQUEST,
+GatewayRequest = _reflection.GeneratedProtocolMessageType('GatewayRequest', (_message.Message,), dict(
+  DESCRIPTOR = _GATEWAYREQUEST,
   __module__ = 'gateway_pb2'
-  # @@protoc_insertion_point(class_scope:Request)
+  # @@protoc_insertion_point(class_scope:GatewayRequest)
   ))
-_sym_db.RegisterMessage(Request)
+_sym_db.RegisterMessage(GatewayRequest)
 
-Response = _reflection.GeneratedProtocolMessageType('Response', (_message.Message,), dict(
-  DESCRIPTOR = _RESPONSE,
+GadgetsResponse = _reflection.GeneratedProtocolMessageType('GadgetsResponse', (_message.Message,), dict(
+  DESCRIPTOR = _GADGETSRESPONSE,
   __module__ = 'gateway_pb2'
-  # @@protoc_insertion_point(class_scope:Response)
+  # @@protoc_insertion_point(class_scope:GadgetsResponse)
   ))
-_sym_db.RegisterMessage(Response)
+_sym_db.RegisterMessage(GadgetsResponse)
 
-MulticastRequest = _reflection.GeneratedProtocolMessageType('MulticastRequest', (_message.Message,), dict(
-  DESCRIPTOR = _MULTICASTREQUEST,
+GadgetsIdent = _reflection.GeneratedProtocolMessageType('GadgetsIdent', (_message.Message,), dict(
+  DESCRIPTOR = _GADGETSIDENT,
   __module__ = 'gateway_pb2'
-  # @@protoc_insertion_point(class_scope:MulticastRequest)
+  # @@protoc_insertion_point(class_scope:GadgetsIdent)
   ))
-_sym_db.RegisterMessage(MulticastRequest)
+_sym_db.RegisterMessage(GadgetsIdent)
 
 
 # @@protoc_insertion_point(module_scope)

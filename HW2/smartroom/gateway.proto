@@ -1,45 +1,26 @@
 syntax = "proto3";
-message Request{
-    RequestType rtype =1;
-    ON_OFF on_off =2;
-    GType gtype = 3;
-    string status =4;
-    string ip= 5;
-    int32 port =6;
-    enum GType{
-        TV = 0;
-        AR = 1;
-        LAMPADA = 2;
-    }
 
+message GatewayRequest{
+    RequestType request_type =1;
+    string value =2;
+    int32 client_ident =3;
+    string aux =4;
     enum RequestType{
         ReadStatus = 0;
         ReadSensor = 1;
         ModStatus  = 2;
         ModOnOf = 3;
+        DiscoverComands = 5;
     }
-
-    enum ON_OFF{
-        OFF  = 0;
-        ON = 1;
-    }
-
 }
 
-message Response{
-    ResponseType type =1;
-    string ip=2;
-    int32 port =3;
-    string result=4;
-    string nome = 5;
-    enum ResponseType{
-        STATUS = 0;
-        SENSOR = 1;
-    }
-
+message GadgetsResponse{
+    string result=1;
+    string name = 2;
+    int32 client_ident=3;
 }
 
-message MulticastRequest{
+message GadgetsIdent{
     string nome=1;
     string ip = 2;
     int64 port=3;

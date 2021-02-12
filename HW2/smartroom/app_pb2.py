@@ -19,37 +19,11 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='app.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\tapp.proto\"\xcf\x02\n\x0bRequest_APP\x12\'\n\x05rtype\x18\x01 \x01(\x0e\x32\x18.Request_APP.RequestType\x12!\n\x05gtype\x18\x02 \x01(\x0e\x32\x12.Request_APP.GType\x12\x1b\n\x13status_modification\x18\x03 \x01(\t\x12#\n\x06on_off\x18\x04 \x01(\x0e\x32\x13.Request_APP.ON_OFF\x12\x0c\n\x04nome\x18\x05 \x01(\t\x12\n\n\x02ip\x18\x06 \x01(\t\x12\x0c\n\x04port\x18\x07 \x01(\x03\"$\n\x05GType\x12\x06\n\x02TV\x10\x00\x12\x06\n\x02\x41R\x10\x01\x12\x0b\n\x07LAMPADA\x10\x02\"I\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\x0e\n\nReadSensor\x10\x01\x12\r\n\tModStatus\x10\x02\x12\x0b\n\x07ModOnOf\x10\x03\"\x19\n\x06ON_OFF\x12\x06\n\x02ON\x10\x00\x12\x07\n\x03OFF\x10\x01\":\n\x0cResponse_APP\x12\x13\n\x0bobject_name\x18\x01 \x01(\t\x12\x15\n\robject_result\x18\x02 \x01(\tb\x06proto3')
+  serialized_pb=_b('\n\tapp.proto\"\xeb\x01\n\x0bRequest_APP\x12.\n\x0crequest_type\x18\x01 \x01(\x0e\x32\x18.Request_APP.RequestType\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0b\n\x03\x61ux\x18\x04 \x01(\t\"\x81\x01\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\x0e\n\nReadSensor\x10\x01\x12\r\n\tModStatus\x10\x02\x12\x0b\n\x07ModOnOf\x10\x03\x12\x0f\n\x0bListObjects\x10\x04\x12\x13\n\x0f\x44iscoverComands\x10\x05\x12\x10\n\x0cVerifyObject\x10\x06\"_\n\x0cResponse_APP\x12\x13\n\x0bobject_name\x18\x01 \x01(\t\x12\x15\n\robject_result\x18\x02 \x01(\t\x12\x13\n\x0blist_object\x18\x03 \x01(\t\x12\x0e\n\x06\x65xists\x18\x05 \x01(\x05\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
-
-_REQUEST_APP_GTYPE = _descriptor.EnumDescriptor(
-  name='GType',
-  full_name='Request_APP.GType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='TV', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='AR', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='LAMPADA', index=2, number=2,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=211,
-  serialized_end=247,
-)
-_sym_db.RegisterEnumDescriptor(_REQUEST_APP_GTYPE)
 
 _REQUEST_APP_REQUESTTYPE = _descriptor.EnumDescriptor(
   name='RequestType',
@@ -73,35 +47,25 @@ _REQUEST_APP_REQUESTTYPE = _descriptor.EnumDescriptor(
       name='ModOnOf', index=3, number=3,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ListObjects', index=4, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DiscoverComands', index=5, number=5,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='VerifyObject', index=6, number=6,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=249,
-  serialized_end=322,
+  serialized_start=120,
+  serialized_end=249,
 )
 _sym_db.RegisterEnumDescriptor(_REQUEST_APP_REQUESTTYPE)
-
-_REQUEST_APP_ON_OFF = _descriptor.EnumDescriptor(
-  name='ON_OFF',
-  full_name='Request_APP.ON_OFF',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='ON', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='OFF', index=1, number=1,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=324,
-  serialized_end=349,
-)
-_sym_db.RegisterEnumDescriptor(_REQUEST_APP_ON_OFF)
 
 
 _REQUEST_APP = _descriptor.Descriptor(
@@ -112,51 +76,30 @@ _REQUEST_APP = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='rtype', full_name='Request_APP.rtype', index=0,
+      name='request_type', full_name='Request_APP.request_type', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='gtype', full_name='Request_APP.gtype', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
+      name='value', full_name='Request_APP.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='status_modification', full_name='Request_APP.status_modification', index=2,
+      name='name', full_name='Request_APP.name', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='on_off', full_name='Request_APP.on_off', index=3,
-      number=4, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='nome', full_name='Request_APP.nome', index=4,
-      number=5, type=9, cpp_type=9, label=1,
+      name='aux', full_name='Request_APP.aux', index=3,
+      number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ip', full_name='Request_APP.ip', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='port', full_name='Request_APP.port', index=6,
-      number=7, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -165,9 +108,7 @@ _REQUEST_APP = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _REQUEST_APP_GTYPE,
     _REQUEST_APP_REQUESTTYPE,
-    _REQUEST_APP_ON_OFF,
   ],
   options=None,
   is_extendable=False,
@@ -176,7 +117,7 @@ _REQUEST_APP = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=14,
-  serialized_end=349,
+  serialized_end=249,
 )
 
 
@@ -201,6 +142,20 @@ _RESPONSE_APP = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='list_object', full_name='Response_APP.list_object', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='exists', full_name='Response_APP.exists', index=3,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -213,16 +168,12 @@ _RESPONSE_APP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=351,
-  serialized_end=409,
+  serialized_start=251,
+  serialized_end=346,
 )
 
-_REQUEST_APP.fields_by_name['rtype'].enum_type = _REQUEST_APP_REQUESTTYPE
-_REQUEST_APP.fields_by_name['gtype'].enum_type = _REQUEST_APP_GTYPE
-_REQUEST_APP.fields_by_name['on_off'].enum_type = _REQUEST_APP_ON_OFF
-_REQUEST_APP_GTYPE.containing_type = _REQUEST_APP
+_REQUEST_APP.fields_by_name['request_type'].enum_type = _REQUEST_APP_REQUESTTYPE
 _REQUEST_APP_REQUESTTYPE.containing_type = _REQUEST_APP
-_REQUEST_APP_ON_OFF.containing_type = _REQUEST_APP
 DESCRIPTOR.message_types_by_name['Request_APP'] = _REQUEST_APP
 DESCRIPTOR.message_types_by_name['Response_APP'] = _RESPONSE_APP
 

@@ -7,10 +7,11 @@ class SmartRoomClient():
         
     
     def read_mensage(self):
+        
         mensagem=self.client_socket.recv(1024)
         response_object =app_pb2.Response_APP()
         response_object.ParseFromString(mensagem)
         return response_object
-    
+        
     def send_mensage(self,mensagem):
         self.client_socket.send(mensagem)

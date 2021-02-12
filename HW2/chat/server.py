@@ -8,6 +8,7 @@ def add_users_tread(server):
     while True:
         connection,adress=server.server_socket.accept()
         print("Adress",adress)
+        print("Connection",connection)
         server.connection_vector.append(connection)
         mensagem=connection.recv(1024)
         nickname = eval(mensagem.decode())['nickname']

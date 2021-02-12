@@ -30,36 +30,30 @@ class Gadgets():
         self.socket = socket.socket(socket.AF_INET, 
                                     socket.SOCK_STREAM)
         try:
-            self.socket.connect((self.server_ip, self.server_port))
-            response = gateway_pb2.MulticastRequest()
-            response.nome = self.nome
-            response.ip =   self.server_ip
-            response.port = self.server_port
-            self.socket.send(response.SerializeToString())
-            
+            self.TCPConnect()
         except:
-            mensage = self.multicastsocket.recv(1024)
-            self.socket.connect((self.server_ip, self.server_port))
-            response = gateway_pb2.MulticastRequest()
-            response.nome = self.nome
-            response.ip =   self.server_ip
-            response.port = self.server_port
-            self.socket.send(response.SerializeToString())
+            self.MulticastConnect()
         
-    def turnon(self):
-        self.ON_OFF='ON'
-    
-    def turnoff(self):
-        self.ON_OFF='OFF'
-    
-    def indent(self):
-        response = gateway_pb2.MulticastRequest()
+    def TCPConnect(self):
+        self.socket.connect((self.server_ip, self.server_port))
+        response = gateway_pb2.GadgetsIdent()
         response.nome = self.nome
         response.ip =   self.server_ip
         response.port = self.server_port
-        self.socket.connect((self.server_ip, self.server_port))
+        
         self.socket.send(response.SerializeToString())
     
-    
+    def MulticastConnect(self):
+        connection_mensage = self.multicastsocket.recv(1024)
+        mensage = gateway_pb2.GatewayRequest()
+        mensage.ParseFromString(connection_mensage)
+        self.socket.connect((self.server_ip, self.server_port))
+        
+        response = gateway_pb2.GadgetsIdent()
+        response.nome = self.nome
+        response.ip =   self.server_ip
+        response.port = self.server_port
+        
+        self.socket.send(response.SerializeToString())
         
             
