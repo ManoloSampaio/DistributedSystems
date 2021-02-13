@@ -41,6 +41,6 @@ class Television(Gadgets):
             response.result = '\n CHANGE VOLUME: Type vol \n CHANGE CHANEL: Type chanel \n SEE VOL: Type svol \n SEE CHANEL: Type schanel \n TURN OFF TV: Type off'
         
         response.name = self.nome
-        
+        response.sensor_ident = 0
         self.socket.send(response.SerializeToString())
         

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='app.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\tapp.proto\"\xeb\x01\n\x0bRequest_APP\x12.\n\x0crequest_type\x18\x01 \x01(\x0e\x32\x18.Request_APP.RequestType\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0b\n\x03\x61ux\x18\x04 \x01(\t\"\x81\x01\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\x0e\n\nReadSensor\x10\x01\x12\r\n\tModStatus\x10\x02\x12\x0b\n\x07ModOnOf\x10\x03\x12\x0f\n\x0bListObjects\x10\x04\x12\x13\n\x0f\x44iscoverComands\x10\x05\x12\x10\n\x0cVerifyObject\x10\x06\"_\n\x0cResponse_APP\x12\x13\n\x0bobject_name\x18\x01 \x01(\t\x12\x15\n\robject_result\x18\x02 \x01(\t\x12\x13\n\x0blist_object\x18\x03 \x01(\t\x12\x0e\n\x06\x65xists\x18\x05 \x01(\x05\x62\x06proto3')
+  serialized_pb=_b('\n\tapp.proto\"\xf7\x01\n\x0bRequest_APP\x12.\n\x0crequest_type\x18\x01 \x01(\x0e\x32\x18.Request_APP.RequestType\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0b\n\x03\x61ux\x18\x04 \x01(\t\"\x8d\x01\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\x0e\n\nReadSensor\x10\x01\x12\r\n\tModStatus\x10\x02\x12\x0b\n\x07ModOnOf\x10\x03\x12\x0f\n\x0bListObjects\x10\x04\x12\x13\n\x0f\x44iscoverComands\x10\x05\x12\x10\n\x0cVerifyObject\x10\x06\x12\n\n\x06LogOut\x10\x07\"_\n\x0cResponse_APP\x12\x13\n\x0bobject_name\x18\x01 \x01(\t\x12\x15\n\robject_result\x18\x02 \x01(\t\x12\x13\n\x0blist_object\x18\x03 \x01(\t\x12\x0e\n\x06\x65xists\x18\x05 \x01(\x05\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -59,11 +59,15 @@ _REQUEST_APP_REQUESTTYPE = _descriptor.EnumDescriptor(
       name='VerifyObject', index=6, number=6,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LogOut', index=7, number=7,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=120,
-  serialized_end=249,
+  serialized_end=261,
 )
 _sym_db.RegisterEnumDescriptor(_REQUEST_APP_REQUESTTYPE)
 
@@ -117,7 +121,7 @@ _REQUEST_APP = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=14,
-  serialized_end=249,
+  serialized_end=261,
 )
 
 
@@ -168,8 +172,8 @@ _RESPONSE_APP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=251,
-  serialized_end=346,
+  serialized_start=263,
+  serialized_end=358,
 )
 
 _REQUEST_APP.fields_by_name['request_type'].enum_type = _REQUEST_APP_REQUESTTYPE

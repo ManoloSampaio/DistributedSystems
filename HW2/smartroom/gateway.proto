@@ -17,7 +17,8 @@ message GatewayRequest{
 message GadgetsResponse{
     string result=1;
     string name = 2;
-    int32 client_ident=3;
+    int32 sensor_ident =3;
+    int32 client_ident=4;
 }
 
 message GadgetsIdent{

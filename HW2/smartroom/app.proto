@@ -13,6 +13,7 @@ message Request_APP{
         ListObjects = 4;
         DiscoverComands= 5;
         VerifyObject = 6;
+        LogOut =7;
     }
 
 }

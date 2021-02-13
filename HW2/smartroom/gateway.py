@@ -31,7 +31,7 @@ class Gateway():
 
         self.client_vectors = []
         self.object_dict = {}
-        self.sensor_value = '0'
+        self.sensor_value = 'NULL'
     
     def send_to_object(self,mensagem,client_ident):
         server_request = gateway_pb2.GatewayRequest()

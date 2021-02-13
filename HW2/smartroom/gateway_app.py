@@ -18,10 +18,24 @@ def listen_app_users(connection,address):
         mensagem=connection.recv(1024)
         user_request = app_pb2.Request_APP()
         user_request.ParseFromString(mensagem)
-        print(user_request.request_type)
-        if  user_request.request_type!=4 and user_request.request_type!=6:
+        
+        if  user_request.request_type!=4 and user_request.request_type!=6 and user_request.request_type!=1:
+            if user_request.request_type==7:
+                connection.close()
+                break
+            
             client_ident = gateway.client_vectors.index(connection)
             gateway.send_to_object(user_request,client_ident)
+        
+        if user_request.request_type==1:
+            server_response = app_pb2.Response_APP()
+            if gateway.sensor_value!='NULL':
+                server_response.object_name = user_request.name
+                server_response.object_result = gateway.sensor_value
+                connection.send(server_response.SerializeToString())
+            else:
+                client_ident = gateway.client_vectors.index(connection)
+                gateway.send_to_object(user_request,client_ident)
         
         if user_request.request_type==4:
             server_response = app_pb2.Response_APP()
@@ -62,10 +76,15 @@ def listen_gaggets(connection):
         mensagem = connection.recv(1024)
         object_response = gateway_pb2.GadgetsResponse()
         object_response.ParseFromString(mensagem)
-        i = object_response.client_ident
-        connection_app = gateway.client_vectors[i]
-        gateway.send_to_user(connection_app,object_response)
-                
+        
+        if object_response.sensor_ident==1:
+            gateway.sensor_value = object_response.result
+            
+        if object_response.sensor_ident==0:    
+            i = object_response.client_ident
+            connection_app = gateway.client_vectors[i]
+            gateway.send_to_user(connection_app,object_response)
+
 
 gateway = Gateway('228.0.0.8',50000)
 
