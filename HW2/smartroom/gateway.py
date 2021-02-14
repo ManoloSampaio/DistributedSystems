@@ -20,8 +20,6 @@ class Gateway():
         
         self.cast_address = (MCAST_GRP,
                             MCAST_PORT)
-        address = ('',MCAST_PORT)
-        self.multicastsocket.bind(address)
         
         self.server_socket_1 = socket.socket(socket.AF_INET, 
                                              socket.SOCK_STREAM)
