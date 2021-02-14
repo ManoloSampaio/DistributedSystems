@@ -22,6 +22,8 @@ class Gadgets():
         group = socket.inet_aton(MCAST_GRP)
         mreq = struct.pack('4sL', group, socket.INADDR_ANY)
         self.multicastsocket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP,mreq)
+        
+        
         self.ON_OFF ='ON' 
         self.nome = Nome_Dispositivo
         self.server_ip = 'localhost'
@@ -44,9 +46,9 @@ class Gadgets():
         self.socket.send(response.SerializeToString())
     
     def MulticastConnect(self):
-        connection_mensage = self.multicastsocket.recv(1024)
-        mensage = gateway_pb2.GatewayRequest()
-        mensage.ParseFromString(connection_mensage)
+        connection_message = self.multicastsocket.recv(1024)
+        message = gateway_pb2.GatewayRequest()
+        message.ParseFromString(connection_message)
         self.socket.connect((self.server_ip, self.server_port))
         
         response = gateway_pb2.GadgetsIdent()

@@ -9,7 +9,7 @@ class Client():
         self.operations = ['+','-','/','*']
 
        
-    def send_mensage(self,x,y,operation):
+    def send_message(self,x,y,operation):
         request = calc_pb2.RequestCalc()
         request.num_1=float(x)
         request.num_2=float(y)
@@ -17,11 +17,10 @@ class Client():
                 
         self.client_socket.send(request.SerializeToString())
         
-        return self.receive_mensage()
+        return self.listen_message()
     
-    def receive_mensage(self):
+    def listen_message(self):
         response = calc_pb2.ResponseCalc()
-        
         mensagem= self.client_socket.recv(1024)
         response.ParseFromString(mensagem)
         return response.value

@@ -8,6 +8,11 @@ while True:
     
     message,client_address= calc.listen_user()
     response = calc.operation(message)
-    print(response)
-    calc.send_mensage(response,client_address)
+    calc.send_message(response,client_address)
+
+
+
+    
+    
+
     

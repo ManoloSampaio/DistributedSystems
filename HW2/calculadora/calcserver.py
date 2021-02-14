@@ -12,6 +12,7 @@ class Server():
         message,address = self.serversocket.recvfrom(1024)
         return message,address
     
+    
     def operation(self,message):
             
         request = calc_pb2.RequestCalc()
@@ -30,6 +31,11 @@ class Server():
         
         return response.SerializeToString()
     
-    def send_mensage(self,message,client_address):
-        print(client_address)
+    def send_message(self,message,client_address):
         self.serversocket.sendto(message,client_address)
+        
+        
+        
+        
+        
+        

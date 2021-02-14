@@ -20,16 +20,16 @@ def send_mensage(client):
         if mensagem=='/SAIR':
             break
 
-user_input = input()
+user_input = input('Digite /ENTRAR para ENTRAR: ')
 if user_input =='/ENTRAR':
-    nickname =input('Digite o seu nickname: ')
-    server_ip = '127.0.0.1'
-    server_port = 65432
+    nickname =    input('Digite o seu nickname: ')
+    server_ip =   input('Digite o ip do servidor: ')
+    server_port = int(input('Digite a porta associada: '))
     # Porta: 65432
     #local_host: '127.0.0.1'
     client = ChatClient(nickname,server_ip,server_port)
 
-    print("Conectando com o servidor")
+    print("Conectado com o servidor, pode digitar as mensagens")
 
     t_1 = threading.Thread(target=send_mensage, args=(client,))
     t_2 = threading.Thread(target=listen_mensage, args=(client,))

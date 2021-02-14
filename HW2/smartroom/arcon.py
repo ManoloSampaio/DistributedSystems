@@ -34,12 +34,15 @@ class ArCodicionado(Gadgets):
             response.result = f'Room Temperature: {self.temperature_sensor}'
         
         if request.request_type == 3:
-            self.ON_OFF = 'OFF'
-            response.result =f'{self.ON_OFF}' 
-        
+            self.ON_OFF=request.value
+                
+            response.result =f'{self.NOME} Esta: {self.ON_OFF}'
+                
         if request.request_type == 5:
-            response.result = '\n CHANGE Temperature: Type temp \n SEE Set Temperature: Type sstemp \n SEE Room Temperature: Type sensor \n TURN OFF TV: Type off'
-        
+            if self.ON_OFF=1:
+                response.result = '\n Modifique Temperatura: Digite temp \n Modifique Temperatura: Digite sstemp \n Veja Temperatura da sala: Digite sensor \n Desligue o Ar: Digite off'
+            else:
+                response.result = 'Objeto se encontra em stand-by, digite ON para liga-lo'
         response.name = self.nome
         response.sensor_ident = 0
         self.socket.send(response.SerializeToString())

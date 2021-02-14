@@ -26,4 +26,3 @@ message GadgetsIdent{
     string ip = 2;
     int64 port=3;
 }
-

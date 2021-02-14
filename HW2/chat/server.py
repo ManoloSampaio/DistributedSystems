@@ -6,12 +6,11 @@ import json
 def add_users_tread(server):
     print("Conectando Usuarios")
     while True:
-        connection,adress=server.server_socket.accept()
-        print("Adress",adress)
-        print("Connection",connection)
+        connection,address=server.server_socket.accept()
         server.connection_vector.append(connection)
         mensagem=connection.recv(1024)
         nickname = eval(mensagem.decode())['nickname']
+        print(f"User({nickname})(Address): ",address)
         server.nicknames.append(nickname)
         start_new_thread(listen_thread,(server,connection))
         server.send_mensage(json.dumps({'mensagem':f'{nickname} entrou no servidor',
