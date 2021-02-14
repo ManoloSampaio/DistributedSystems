@@ -5,20 +5,11 @@ class Gadgets():
     def __init__(self,ip_multicast,port_multicast,Nome_Dispositivo,server_ip,server_port):
         MCAST_GRP = ip_multicast
         MCAST_PORT = port_multicast
-        
         self.multicastsocket = socket.socket(socket.AF_INET, 
                                            socket.SOCK_DGRAM)
-
-        self.multicastsocket.setsockopt(
-                                      socket.SOL_SOCKET, 
-                                      socket.SO_REUSEADDR,1
-                                      )
-        
         self.cast_adress = (MCAST_GRP,
                             MCAST_PORT)
-        
-        self.server_address = ('',MCAST_PORT)
-        self.multicastsocket.bind(self.server_address)
+        self.multicastsocket.bind(('',MCAST_PORT))
         group = socket.inet_aton(MCAST_GRP)
         mreq = struct.pack('4sL', group, socket.INADDR_ANY)
         self.multicastsocket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP,mreq)
