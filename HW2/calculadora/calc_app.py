@@ -1,21 +1,21 @@
 import socket
-from calc_client import CalcClient
+from calc_client import Client
 
-calc = CalcClient()	
-print("UDP Calc Manolo")
+client = Client('localhost',12000)	
+print("UDP Calculadora")
 
 while True:
-	print('Digite 1: para somar dois números: x+y')
-	print('Digite 2: para subtrair dois números: x-y')  
-	print('Digite 3: para dividir dois números: x/y')
-	print('Digite 4: para multiplicar dois números: x*y')
-
-	number = input()
-	calc.send_mensage(f'{number}')
-	x=input("Digite x: ")
-	y=input("Digite y: ")
-	print(calc.send_mensage(f'{x},{y}'))
-
 	
-  
+	print('Digite +: para somar dois números: x+y')
+	print('Digite -: para subtrair dois números: x-y')  
+	print('Digite /: para dividir dois números: x/y')
+	print('Digite *: para multiplicar dois números: x*y')
 	
+	operation = input()
+	if operation in client.operations:
+		index = client.operations.index(operation)
+		x=input("Digite x: ")
+		y=input("Digite y: ")
+		print(client.send_mensage(x,y,index))
+	else:
+		print('Operacao nao encontrada')

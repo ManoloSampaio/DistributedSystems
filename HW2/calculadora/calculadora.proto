@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+message RequestCalc{
+    float num_1 =1;
+    float num_2 =2;
+    int32 operation =3;
+}
+message ResponseCalc{
+    float value=1;
+}
