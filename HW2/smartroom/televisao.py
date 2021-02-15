@@ -49,6 +49,6 @@ class Television(Gadgets):
         response.name = self.nome
         response.object_status = self.ON_OFF
         response.sensor_ident = 0
-        
+        response.client_ident=request.client_ident        
         self.socket.send(response.SerializeToString())
         

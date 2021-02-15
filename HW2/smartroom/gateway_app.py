@@ -4,6 +4,7 @@ import threading
 import app_pb2
 import gateway_pb2
 import time
+
 def add_app_users(gateway):
     while True:
         connection,address=gateway.server_socket_1.accept()
@@ -35,6 +36,7 @@ def listen_app_users(connection,address):
                 connection.send(server_response.SerializeToString())
             else:
                 client_ident = gateway.client_vectors.index(connection)
+                
                 gateway.send_to_object(user_request,client_ident)
         
         if user_request.request_type==5:

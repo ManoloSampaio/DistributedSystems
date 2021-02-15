@@ -39,7 +39,7 @@ class Gateway():
         server_request.request_type = message.request_type
         server_request.value = message.value
         server_request.client_ident = client_ident
-
+        
         connection.send(server_request.SerializeToString())
 
     def send_to_user(self,connection,message):

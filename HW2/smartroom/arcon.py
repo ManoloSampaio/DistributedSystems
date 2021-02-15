@@ -36,10 +36,11 @@ class ArCodicionado(Gadgets):
         
             if request.request_type == 3:
                 self.ON_OFF=False
-                response.result =f'{self.NOME} Esta: OFF'
+                response.result =f'{self.nome} Esta: OFF'
                 
             if request.request_type == 4:
                 response.result = '\n Modifique Temperatura: Digite temp \n Modifique Temperatura: Digite sstemp \n Veja Temperatura da sala: Digite sensor \n Desligue o Ar: Digite off'
+                response.object_comands[:] =['temp','sstemp','sensor','off']
         else:
             response.result=f'{self.nome} em standby, para usar digite on'
             response.object_comands[:] =['on']
@@ -50,4 +51,5 @@ class ArCodicionado(Gadgets):
         response.name = self.nome
         response.object_status = self.ON_OFF
         response.sensor_ident = 0
+        response.client_ident=request.client_ident
         self.socket.send(response.SerializeToString())

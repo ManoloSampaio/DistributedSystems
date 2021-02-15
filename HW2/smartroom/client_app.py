@@ -52,11 +52,13 @@ def send_message(client):
                 request_message.request_type = app_pb2.Request_APP().RequestType.DiscoverComands
                 request_message.name =command
                 client.send_message(request_message.SerializeToString())
+                print("ESCUTANDO")
                 message = listen_message(client)    
                 if message.object_status:
                     desire=input('Digite Comando: ')        
                     request= app_pb2.Request_APP()
                     if desire in message.object_comands:
+                        
                         if desire=='vol':
                             request.request_type=app_pb2.Request_APP.RequestType.ModStatus
                             request.value = input('Qual o Volume Desejado: ')
@@ -80,7 +82,7 @@ def send_message(client):
                             client.send_message(request.SerializeToString())
                             listen_message(client)
                         
-                        if desire=='schnael':
+                        if desire=='schanel':
                             request.request_type=app_pb2.Request_APP.RequestType.ReadStatus
                             request.aux = 'schanel'
                             request.name = command
@@ -114,6 +116,23 @@ def send_message(client):
                             request.name = command
                             client.send_message(request.SerializeToString())
                             listen_message(client)
+                        
+                        if desire=='msg':
+                            request.request_type=app_pb2.Request_APP.RequestType.ModStatus
+                            request.aux = desire
+                            request.value = input('Digite a mensagem: ')
+                            request.name=command
+                            client.send_message(request.SerializeToString())
+                            listen_message(client)
+                        
+                        if desire=='smsg':
+                            request.request_type=app_pb2.Request_APP.RequestType.ReadStatus
+                            request.aux = desire
+                            request.name = command
+                            client.send_message(request.SerializeToString())
+                            listen_message(client)
+                            
+                                
                 else:
                     desire=input('Digite Comando: ')        
                     request= app_pb2.Request_APP()
