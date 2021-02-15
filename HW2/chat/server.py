@@ -3,7 +3,7 @@ from _thread import *
 import threading 
 import json
   
-def add_users_tread(server):
+def add_users(server):
     print("Conectando Usuarios")
     while True:
         connection,address=server.server_socket.accept()
@@ -12,11 +12,11 @@ def add_users_tread(server):
         nickname = eval(mensagem.decode())['nickname']
         print(f"User({nickname})(Address): ",address)
         server.nicknames.append(nickname)
-        start_new_thread(listen_thread,(server,connection))
+        start_new_thread(listen_users,(server,connection))
         server.send_mensage(json.dumps({'mensagem':f'{nickname} entrou no servidor',
                         'nickname':'Server'}).encode())
         
-def listen_thread(server,connection):
+def listen_users(server,connection):
     while True:
         mensagem=connection.recv(1024)
         if not mensagem:
@@ -34,6 +34,6 @@ server = ChatServer()
 server.server_socket.bind(('127.0.0.1',65432))
 server.server_socket.listen(1)
 
-t_1 = threading.Thread(target = add_users_tread(server))
+t_1 = threading.Thread(target = add_users(server))
 
 t_1.start()

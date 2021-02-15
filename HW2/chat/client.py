@@ -1,7 +1,6 @@
 from chat_client import ChatClient
 from _thread import *
 import threading 
-import time
 
 def listen_mensage(client):
     while True:
