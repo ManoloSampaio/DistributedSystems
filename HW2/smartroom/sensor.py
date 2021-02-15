@@ -4,6 +4,7 @@ class Lampada(Gadgets):
         super().__init__(ip_multicast,port_multicast,
                        Nome_Dispositivo,server_ip,server_port)
         
+        self.temperature_sensor = 25    
     
     def receive_mensage(self):
         response = gateway_pb2.GadgetsResponse()

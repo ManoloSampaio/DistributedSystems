@@ -52,74 +52,79 @@ def send_message(client):
                 request_message.request_type = app_pb2.Request_APP().RequestType.DiscoverComands
                 request_message.name =command
                 client.send_message(request_message.SerializeToString())
-                listen_message(client)    
-                desire=input('Digite Comando: ')        
-                request= app_pb2.Request_APP()
-                
-                if desire=='vol':
-                    request.request_type=app_pb2.Request_APP.RequestType.ModStatus
-                    request.value = input('Qual o Volume Desejado: ')
-                    request.aux = 'vol'
-                    request.name = command
-                    client.send_message(request.SerializeToString())
-                    listen_message(client)
+                message = listen_message(client)    
+                if message.object_status:
+                    desire=input('Digite Comando: ')        
+                    request= app_pb2.Request_APP()
+                    if desire in message.object_comands:
+                        if desire=='vol':
+                            request.request_type=app_pb2.Request_APP.RequestType.ModStatus
+                            request.value = input('Qual o Volume Desejado: ')
+                            request.aux = 'vol'
+                            request.name = command
+                            client.send_message(request.SerializeToString())
+                            listen_message(client)
+                        
+                        if desire=='chanel':
+                            request.request_type=app_pb2.Request_APP.RequestType.ModStatus
+                            request.value = input('Qual o Canal Desejado: ')
+                            request.aux = 'chanel'
+                            request.name = command
+                            client.send_message(request.SerializeToString())
+                            listen_message(client)
+                        
+                        if desire=='svol':
+                            request.request_type=app_pb2.Request_APP.RequestType.ReadStatus
+                            request.aux = 'svol'
+                            request.name = command
+                            client.send_message(request.SerializeToString())
+                            listen_message(client)
+                        
+                        if desire=='schnael':
+                            request.request_type=app_pb2.Request_APP.RequestType.ReadStatus
+                            request.aux = 'schanel'
+                            request.name = command
+                            client.send_message(request.SerializeToString())
+                            listen_message(client)
+                        
+                        if desire=='off':
+                            request.request_type=app_pb2.Request_APP.RequestType.ModOnOf
+                            request.name = command
+                            client.send_message(request.SerializeToString())
+                            listen_message(client)
                     
-                if desire=='chanel':
-                    request.request_type=app_pb2.Request_APP.RequestType.ModStatus
-                    request.value = input('Qual o Canal Desejado: ')
-                    request.aux = 'chanel'
-                    request.name = command
-                    client.send_message(request.SerializeToString())
-                    listen_message(client)
-                    
-                if desire=='svol':
-                    request.request_type=app_pb2.Request_APP.RequestType.ReadStatus
-                    request.aux = 'svol'
-                    request.name = command
-                    client.send_message(request.SerializeToString())
-                    listen_message(client)
-                    
-                if desire=='schnael':
-                    request.request_type=app_pb2.Request_APP.RequestType.ReadStatus
-                    request.aux = 'schanel'
-                    request.name = command
-                    client.send_message(request.SerializeToString())
-                    listen_message(client)
-                    
-                if desire=='off':
-                    request.request_type=app_pb2.Request_APP.RequestType.ModOnOf
-                    request.name = command
-                    client.send_message(request.SerializeToString())
-                    listen_message(client)
-                
-                if desire=='on':
-                    request.request_type=app_pb2.Request_APP.RequestType.ModOnOf
-                    request.name = command
-                    client.send_message(request.SerializeToString())
-                    listen_message(client)
-                    
-                if desire=='sensor':
-                    request.request_type=app_pb2.Request_APP.RequestType.ReadSensor
-                    request.name = command
-                    client.send_message(request.SerializeToString())
-                    listen_message(client)
-                    
-                if desire=='temp':
-                    request.request_type=app_pb2.Request_APP.RequestType.ModStatus
-                    request.value = input('Qual a temperatura desejada: ')
-                    request.aux = desire
-                    request.name = command
-                    client.send_message(request.SerializeToString())
-                    listen_message(client)
-                    
-                if desire=='sstemp':
-                    request.request_type=app_pb2.Request_APP.RequestType.ReadStatus
-                    request.aux = desire
-                    request.name = command
-                    client.send_message(request.SerializeToString())
-                    listen_message(client)
-                    
-
+                        if desire=='sensor':
+                            request.request_type=app_pb2.Request_APP.RequestType.ReadSensor
+                            request.aux = desire
+                            request.name = command
+                            client.send_message(request.SerializeToString())
+                            listen_message(client)
+                        
+                        if desire=='temp':
+                            request.request_type=app_pb2.Request_APP.RequestType.ModStatus
+                            request.value = input('Qual a temperatura desejada: ')
+                            request.aux = desire
+                            request.name = command
+                            client.send_message(request.SerializeToString())
+                            listen_message(client)
+                        
+                        if desire=='sstemp':
+                            request.request_type=app_pb2.Request_APP.RequestType.ReadStatus
+                            request.aux = desire
+                            request.name = command
+                            client.send_message(request.SerializeToString())
+                            listen_message(client)
+                else:
+                    desire=input('Digite Comando: ')        
+                    request= app_pb2.Request_APP()
+                    if desire in message.object_comands:
+                        if desire=='on':
+                            request.request_type=app_pb2.Request_APP.RequestType.ModOnOf
+                            request.name = command
+                            request.aux = desire
+                            client.send_message(request.SerializeToString())
+                            listen_message(client)
+                        
 
     
 server_ip = '127.0.0.1'

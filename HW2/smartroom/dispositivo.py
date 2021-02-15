@@ -9,13 +9,23 @@ class Gadgets():
                                            socket.SOCK_DGRAM)
         self.cast_adress = (MCAST_GRP,
                             MCAST_PORT)
-        self.multicastsocket.bind(('',MCAST_PORT))
         group = socket.inet_aton(MCAST_GRP)
         mreq = struct.pack('4sL', group, socket.INADDR_ANY)
-        self.multicastsocket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP,mreq)
+        
+        self.multicastsocket.setsockopt(
+                                      socket.SOL_SOCKET, 
+                                      socket.SO_REUSEADDR,1
+                                      )
+        
+        self.multicastsocket.setsockopt(socket.IPPROTO_IP, 
+                                        socket.IP_ADD_MEMBERSHIP,
+                                        mreq)
+
+        self.multicastsocket.bind(('',MCAST_PORT))
         
         
-        self.ON_OFF ='ON' 
+        
+        self.ON_OFF =True 
         self.nome = Nome_Dispositivo
         self.server_ip = 'localhost'
         self.server_port = server_port
@@ -48,5 +58,6 @@ class Gadgets():
         response.port = self.server_port
         
         self.socket.send(response.SerializeToString())
-        
-            
+    
+    def IsWorking(self):
+        return self.ON_OFF

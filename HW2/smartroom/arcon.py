@@ -21,28 +21,33 @@ class ArCodicionado(Gadgets):
         response = gateway_pb2.GadgetsResponse()
         request = gateway_pb2.GatewayRequest()
         request.ParseFromString(self.socket.recv(1024))
-        if request.request_type == 2:
-            if request.aux =='temp':
-                self.temperature_set = float(request.value)
-                response.result =f'Setted Temperature: {self.temperature_set}'
+        if self.IsWorking():
+            if request.request_type == 2:
+                if request.aux =='temp':
+                    self.temperature_set = float(request.value)
+                    response.result =f'Setted Temperature: {self.temperature_set}'
                     
-        if request.request_type == 0:
-            if request.aux =='sstemp':
-                response.result =f'Setted Temperature:{self.temperature_set}'
+            if request.request_type == 0:
+                if request.aux =='sstemp':
+                    response.result =f'Setted Temperature:{self.temperature_set}'
         
-        if request.request_type==1:
-            response.result = f'Room Temperature: {self.temperature_sensor}'
+            if request.request_type==1:
+                response.result = f'Room Temperature: {self.temperature_sensor}'
         
-        if request.request_type == 3:
-            self.ON_OFF=request.value
+            if request.request_type == 3:
+                self.ON_OFF=False
+                response.result =f'{self.NOME} Esta: OFF'
                 
-            response.result =f'{self.NOME} Esta: {self.ON_OFF}'
-                
-        if request.request_type == 5:
-            if self.ON_OFF=1:
+            if request.request_type == 4:
                 response.result = '\n Modifique Temperatura: Digite temp \n Modifique Temperatura: Digite sstemp \n Veja Temperatura da sala: Digite sensor \n Desligue o Ar: Digite off'
-            else:
-                response.result = 'Objeto se encontra em stand-by, digite ON para liga-lo'
+        else:
+            response.result=f'{self.nome} em standby, para usar digite on'
+            response.object_comands[:] =['on']
+            if request.request_type == 3:
+                self.ON_OFF=True
+                response.result =f'{self.NOME} Esta: ON'
+        
         response.name = self.nome
+        response.object_status = self.ON_OFF
         response.sensor_ident = 0
         self.socket.send(response.SerializeToString())

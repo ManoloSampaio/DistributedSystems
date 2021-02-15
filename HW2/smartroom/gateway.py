@@ -46,6 +46,9 @@ class Gateway():
         server_response = app_pb2.Response_APP()
         server_response.object_name = message.name
         server_response.object_result = message.result
+        server_response.object_status = message.object_status
+        if message.object_comands!=[]:
+            server_response.object_comands[:] = message.object_comands
         connection.send(server_response.SerializeToString()) 
         
     def find(self):

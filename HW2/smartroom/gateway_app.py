@@ -19,7 +19,7 @@ def listen_app_users(connection,address):
         user_request = app_pb2.Request_APP()
         user_request.ParseFromString(mensagem)
         
-        if  user_request.request_type!=4 and user_request.request_type!=6 and user_request.request_type!=1:
+        if  user_request.request_type!=5 and user_request.request_type!=6 and user_request.request_type!=1:
             if user_request.request_type==7:
                 connection.close()
                 break
@@ -37,7 +37,7 @@ def listen_app_users(connection,address):
                 client_ident = gateway.client_vectors.index(connection)
                 gateway.send_to_object(user_request,client_ident)
         
-        if user_request.request_type==4:
+        if user_request.request_type==5:
             server_response = app_pb2.Response_APP()
             server_response.object_name = 'LIST OBJECTS'
             server_response.list_object = str(list(gateway.object_dict.keys()))
@@ -76,7 +76,6 @@ def listen_gaggets(connection):
         mensagem = connection.recv(1024)
         object_response = gateway_pb2.GadgetsResponse()
         object_response.ParseFromString(mensagem)
-        
         if object_response.sensor_ident==1:
             gateway.sensor_value = object_response.result
             

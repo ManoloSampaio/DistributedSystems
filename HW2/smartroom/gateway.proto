@@ -10,7 +10,7 @@ message GatewayRequest{
         ReadSensor = 1;
         ModStatus  = 2;
         ModOnOf = 3;
-        DiscoverComands = 5;
+        DiscoverComands = 4;
     }
 }
 
@@ -19,6 +19,8 @@ message GadgetsResponse{
     string name = 2;
     int32 sensor_ident =3;
     int32 client_ident=4;
+    int32 object_status=5;
+    repeated string object_comands =6;
 }
 
 message GadgetsIdent{
