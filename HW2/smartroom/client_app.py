@@ -52,7 +52,6 @@ def send_message(client):
                 request_message.request_type = app_pb2.Request_APP().RequestType.DiscoverComands
                 request_message.name =command
                 client.send_message(request_message.SerializeToString())
-                print("ESCUTANDO")
                 message = listen_message(client)    
                 if message.object_status:
                     desire=input('Digite Comando: ')        
