@@ -6,15 +6,22 @@ from client import SmartRoomClient
 
 def listen_message(client):
     message =client.read_message()
+    
     if message.object_name=='LIST OBJECTS':
         print(f"({message.object_name}):{message.list_object}")
+    
     if message.object_name=='EXISTS':
+        
         if message.exists ==1:
             print(f"(Server): Objeto encontrado")
+        
         if message.exists ==0:
             print(f"(Server): Objeto nao encontrado")
+    
     if message.object_name!='LIST OBJECTS' and message.object_name!='EXISTS':
+        
         print(f"({message.object_name}):{message.object_result}")
+    
     return message
         
 def send_message(client):
@@ -22,9 +29,9 @@ def send_message(client):
         request_message = app_pb2.Request_APP()
 
         print("APP MENU:")
-        print("Digite /LIST para ver objetos conectados ao gateaway")    
-        print("Digite /SAIR para sair do app")
-        print("Digite o nome do objeto conectado")
+        print("Digite /LIST para ver objetos conectados ao gateaway.")    
+        print("Digite /SAIR para sair do app.")
+        print("Digite o nome do objeto: ")
         
         command = input('')
         
@@ -53,6 +60,7 @@ def send_message(client):
                 request_message.name =command
                 client.send_message(request_message.SerializeToString())
                 message = listen_message(client)    
+                
                 if message.object_status:
                     desire=input('Digite Comando: ')        
                     request= app_pb2.Request_APP()
@@ -135,6 +143,7 @@ def send_message(client):
                 else:
                     desire=input('Digite Comando: ')        
                     request= app_pb2.Request_APP()
+                    
                     if desire in message.object_comands:
                         if desire=='on':
                             request.request_type=app_pb2.Request_APP.RequestType.ModOnOf
