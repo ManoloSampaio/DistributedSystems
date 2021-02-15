@@ -8,10 +8,10 @@ class Television(Gadgets):
         
         super().__init__(ip_multicast,port_multicast,
                        Nome_Dispositivo,server_ip,server_port)
-        self.chanel = 0
+        self.channel = 0
         self.volume = '20'
 
-    def receive_mensage(self):
+    def receive_message(self):
         response = gateway_pb2.GadgetsResponse()
         request = gateway_pb2.GatewayRequest()
         request.ParseFromString(self.socket.recv(1024))
@@ -21,24 +21,24 @@ class Television(Gadgets):
                     self.volume = request.value
                     response.result =f'VOL: {self.volume}'
             
-                if request.aux == 'chanel':
-                    self.chanel = request.value
-                    response.result =f'CHANEL: {self.chanel}'
+                if request.aux == 'channel':
+                    self.channel = request.value
+                    response.result =f'channel: {self.channel}'
                 
             if request.request_type == 0:
                 if request.aux =='svol':
                     response.result =f'VOL: {self.volume}'
-                if request.aux =='schanel':
-                    response.result =f'CHANEL: {self.chanel}'
+                if request.aux =='schannel':
+                    response.result =f'channel: {self.channel}'
         
             if request.request_type == 3:
                 self.ON_OFF = False
                 response.result =f'{self.nome} esta OFF' 
         
             if request.request_type == 4:
-                response.result = '\n Mudar Volume: Digite vol \n Mudar canal: digite chanel \n Ver volume: digite svol \n Ver Canal: digite schanel \n Desligar: Type off'
+                response.result = '\n Mudar Volume: Digite vol \n Mudar canal: digite channel \n Ver volume: digite svol \n Ver Canal: digite schannel \n Desligar: Type off'
                 
-                response.object_comands[:] =['vol','chanel','svol','schanel','off']
+                response.object_comands[:] =['vol','channel','svol','schannel','off']
         else:
             response.result=f'{self.nome} em standby, para usar digite on'
             response.object_comands[:] =['on']

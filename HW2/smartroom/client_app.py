@@ -74,10 +74,10 @@ def send_message(client):
                             client.send_message(request.SerializeToString())
                             listen_message(client)
                         
-                        if desire=='chanel':
+                        if desire=='channel':
                             request.request_type=app_pb2.Request_APP.RequestType.ModStatus
                             request.value = input('Qual o Canal Desejado: ')
-                            request.aux = 'chanel'
+                            request.aux = 'channel'
                             request.name = command
                             client.send_message(request.SerializeToString())
                             listen_message(client)
@@ -89,9 +89,9 @@ def send_message(client):
                             client.send_message(request.SerializeToString())
                             listen_message(client)
                         
-                        if desire=='schanel':
+                        if desire=='schannel':
                             request.request_type=app_pb2.Request_APP.RequestType.ReadStatus
-                            request.aux = 'schanel'
+                            request.aux = 'schannel'
                             request.name = command
                             client.send_message(request.SerializeToString())
                             listen_message(client)
@@ -127,7 +127,7 @@ def send_message(client):
                         if desire=='msg':
                             request.request_type=app_pb2.Request_APP.RequestType.ModStatus
                             request.aux = desire
-                            request.value = input('Digite a mensagem: ')
+                            request.value = input('Digite a messagem: ')
                             request.name=command
                             client.send_message(request.SerializeToString())
                             listen_message(client)

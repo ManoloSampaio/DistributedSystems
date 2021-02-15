@@ -27,7 +27,7 @@ class Gateway():
         self.server_socket_2 = socket.socket(socket.AF_INET, 
                                              socket.SOCK_STREAM)
 
-        self.client_vectors = []
+        self.client_vector = []
         self.object_dict = {}
         self.sensor_value = 'NULL'
     
@@ -41,7 +41,11 @@ class Gateway():
         server_request.client_ident = client_ident
         
         connection.send(server_request.SerializeToString())
-
+    def remove_user(self,connection_user):
+        for i in range(len(self.client_vector)):
+            if self.client_vector[i]==connection_user:
+                self.client_vector.pop(i)
+    
     def send_to_user(self,connection,message):
         server_response = app_pb2.Response_APP()
         server_response.object_name = message.name

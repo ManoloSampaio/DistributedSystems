@@ -14,13 +14,15 @@ class ArCodicionado(Gadgets):
     def change_temperature(self):
         if self.temperature_sensor>self.temperature_set:
             self.temperature_sensor = self.temperature_sensor-0.1
+        
         if self.temperature_sensor<self.temperature_set:
             self.temperature_sensor = self.temperature_sensor+0.1
     
-    def receive_mensage(self):
+    def receive_message(self):
         response = gateway_pb2.GadgetsResponse()
         request = gateway_pb2.GatewayRequest()
         request.ParseFromString(self.socket.recv(1024))
+        
         if self.IsWorking():
             if request.request_type == 2:
                 if request.aux =='temp':
@@ -46,7 +48,7 @@ class ArCodicionado(Gadgets):
             response.object_comands[:] =['on']
             if request.request_type == 3:
                 self.ON_OFF=True
-                response.result =f'{self.NOME} Esta: ON'
+                response.result =f'{self.nome} Esta: ON'
         
         response.name = self.nome
         response.object_status = self.ON_OFF

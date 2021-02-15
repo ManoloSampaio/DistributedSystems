@@ -3,12 +3,12 @@ from _thread import *
 import threading 
 import app_pb2
 import gateway_pb2
-import time
+#import time
 
 def add_app_users(gateway):
     while True:
         connection,address=gateway.server_socket_1.accept()
-        gateway.client_vectors.append(connection)
+        gateway.client_vector.append(connection)
         
         print("NEW APP USER ADDRESS:",address)
         
@@ -16,17 +16,18 @@ def add_app_users(gateway):
 
 def listen_app_users(connection,address):
     while True:
-        mensagem=connection.recv(1024)
+        messagem=connection.recv(1024)
         user_request = app_pb2.Request_APP()
-        user_request.ParseFromString(mensagem)
+        user_request.ParseFromString(messagem)
         
-        if  user_request.request_type!=5 and user_request.request_type!=6 and user_request.request_type!=1:
-            if user_request.request_type==7:
+        if  user_request.request_type<5 and user_request.request_type!=1:
+            client_ident = gateway.client_vector.index(connection)
+            gateway.send_to_object(user_request,client_ident)
+        
+        if user_request.request_type==7:
+                gateway.remove_user(connection)
                 connection.close()
                 break
-            
-            client_ident = gateway.client_vectors.index(connection)
-            gateway.send_to_object(user_request,client_ident)
         
         if user_request.request_type==1:
             server_response = app_pb2.Response_APP()
@@ -35,7 +36,7 @@ def listen_app_users(connection,address):
                 server_response.object_result = gateway.sensor_value
                 connection.send(server_response.SerializeToString())
             else:
-                client_ident = gateway.client_vectors.index(connection)
+                client_ident = gateway.client_vector.index(connection)
                 
                 gateway.send_to_object(user_request,client_ident)
         
@@ -60,30 +61,25 @@ def listen_app_users(connection,address):
             
 def add_gaggets(gateway):
     while True:
-        mensagem = gateway_pb2.GadgetsIdent()
-        
+        messagem = gateway_pb2.GadgetsIdent()
         connection,address=gateway.server_socket_2.accept()
-        
-        mensagem.ParseFromString(connection.recv(1024))
-        
-        print(f'NEW OBJECT ADDRESS:{address}. OBJECT NAME:{mensagem.nome}')
-        
-        gateway.object_dict[mensagem.nome]=connection   
-        
+        messagem.ParseFromString(connection.recv(1024))
+        print(f'NEW OBJECT ADDRESS:{address}. OBJECT NAME:{messagem.nome}')
+        gateway.object_dict[messagem.nome]=connection   
         start_new_thread(listen_gaggets,(connection,))
 
 
 def listen_gaggets(connection):
     while True:
-        mensagem = connection.recv(1024)
+        messagem = connection.recv(1024)
         object_response = gateway_pb2.GadgetsResponse()
-        object_response.ParseFromString(mensagem)
+        object_response.ParseFromString(messagem)
         if object_response.sensor_ident==1:
             gateway.sensor_value = object_response.result
             
         if object_response.sensor_ident==0:    
             i = object_response.client_ident
-            connection_app = gateway.client_vectors[i]
+            connection_app = gateway.client_vector[i]
             gateway.send_to_user(connection_app,object_response)
 
 

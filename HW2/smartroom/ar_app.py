@@ -18,7 +18,7 @@ ar = ArCodicionado('228.0.0.8',50000,'Ar','127.0.0.1',65432)
 t_1 = threading.Thread(target=send_temperature, args=(ar,))
 t_1.start()
 while True:    
-    ar.receive_mensage()
+    ar.receive_message()
     if ar.ON_OFF:
         ar.change_temperature()
     

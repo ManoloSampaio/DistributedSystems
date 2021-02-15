@@ -15,7 +15,6 @@ message Request_APP{
         VerifyObject = 6;
         LogOut =7;
     }
-
 }
 
 message Response_APP{
