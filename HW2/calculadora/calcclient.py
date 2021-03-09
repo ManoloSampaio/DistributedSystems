@@ -13,7 +13,7 @@ class Client():
         request = calc_pb2.RequestCalc()
         request.num_1=float(x)
         request.num_2=float(y)
-        request.operation=operation    
+        request.op= operation
                 
         self.client_socket.send(request.SerializeToString())
         

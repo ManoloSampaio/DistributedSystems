@@ -3,7 +3,6 @@ from _thread import *
 import threading 
 import app_pb2
 import gateway_pb2
-#import time
 
 def add_app_users(gateway):
     while True:

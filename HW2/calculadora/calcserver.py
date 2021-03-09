@@ -12,23 +12,41 @@ class Server():
         message,address = self.serversocket.recvfrom(1024)
         return message,address
     
+    def soma(self,x,y):
+        return x+y
+    
+    def subtracao(self,x,y):
+        return x-y
+    
+    def divisao(self,x,y):
+        return x/y
+    
+    def multplicacao(self,x,y):
+        return x*y
     
     def operation(self,message):
             
         request = calc_pb2.RequestCalc()
-        response = calc_pb2.ResponseCalc()
+        
         
         request.ParseFromString(message)
-    
-        if request.operation==0:
-            response.value = request.num_1+request.num_2
-        if request.operation==1:
-            response.value = request.num_1-request.num_2
-        if request.operation==2:
-            response.value = request.num_1/request.num_2
-        if request.operation==3:
-            response.value = request.num_1*request.num_2
         
+        x = request.num_1
+        y = request.num_2
+        
+        if request.op==0:
+            return self.soma(x,y)
+        if request.op==1:
+            return self.subtracao(x,y)
+        if request.op==2:
+            return self.divisao(x,y)
+        if request.op==3:
+            return self.multplicacao(x,y)
+        
+        
+    def create_response(self,message):
+        response = calc_pb2.ResponseCalc()
+        response.value = self.operation(message)
         return response.SerializeToString()
     
     def send_message(self,message,client_address):

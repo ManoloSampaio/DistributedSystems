@@ -3,8 +3,18 @@ syntax = "proto3";
 message RequestCalc{
     float num_1 =1;
     float num_2 =2;
-    int32 operation =3;
+    operation op=3;
+    
+    enum operation{
+        SUM = 0;
+        MIN = 1;
+        DIV = 2;
+        MULT = 3;
+    }
 }
+
 message ResponseCalc{
     float value=1;
 }
+
+

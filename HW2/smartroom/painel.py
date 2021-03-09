@@ -15,10 +15,11 @@ class Painel(Gadgets):
         
         if self.ON_OFF:
             if request.request_type ==2:
-               self.messagem_lamp = request.value
+               self.message_lamp = request.value
                response.result = f'messagem atual: {self.message_lamp}'
             if request.request_type==0:
                 response.result = f'messagem atual: {self.message_lamp}'
+            
             if request.request_type == 3:
                 self.ON_OFF = False
                 response.result =f'{self.nome} esta off' 
