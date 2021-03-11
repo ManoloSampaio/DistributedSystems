@@ -45,30 +45,30 @@ def add_conexoes(ambiente):
     while 1:
         conexao,addr = ambiente.ambiente_socket.accept()
         if conexao:
+            print('Achou')
             ambiente.conexoes.append(conexao)
 def listen_request(ambiente):
     while 1:
         for conexao in ambiente.conexoes:
-            mensagem=conexao.recv(1024)
-            with conexao:
-                mensagem_decodificada=json.loads(mensagem.decode())
-                if mensagem_decodificada[0]=='sensor':
-                    if mensagem_decodificada[1]=='temperatura':
-                        conexao.send(json.dumps(['pedido aceito',ambiente.Temperatura]).encode())
-                    if mensagem_decodificada[1]=='umidade':
-                        conexao.send(json.dumps(['pedido aceito',ambiente.Umidade]).encode())
-                    if mensagem_decodificada[1]=='luminosidade':
-                        conexao.send(json.dumps(['pedido aceito',ambiente.Luminosidade]).encode())
-                elif mensagem_decodificada[0]=='atuador':
-                    if mensagem_decodificada[1]=='temperatura':
-                        ambiente.setTemperaturaEquilibrio(mensagem_decodificada[2])
-                        conexao.send(json.dumps('Temperatura configurada para ',mensagem_decodificada[2]).encode())
-                    if mensagem_decodificada[1]=='umidade':
-                        ambiente.setUmidadeEquilibrio(mensagem_decodificada[2])
-                        conexao.send(json.dumps('Umidade configurada para ',mensagem_decodificada[2]).encode())
-                    if mensagem_decodificada[1]=='luminosidade':
-                        ambiente.setLuminosidade(mensagem_decodificada[2])
-                        conexao.send(json.dumps('Luminosidade configurada para ',mensagem_decodificada[2]).encode())
+            mensagem=conexao.recv(1024).decode()
+            mensagem_vetor=json.loads(mensagem)
+            if mensagem[0]=='sensor':
+                if mensagem[1]=='temperatura':
+                    conexao.send(json.dumps(['pedido aceito',ambiente.Temperatura]).encode())
+                if mensagem[1]=='umidade':
+                    conexao.send(json.dumps(['pedido aceito',ambiente.Umidade]).encode())
+                if mensagem[1]=='luminosidade':
+                    conexao.send(json.dumps(['pedido aceito',ambiente.Luminosidade]).encode())
+            elif mensagem[0]=='atuador':
+                if mensagem[1]=='temperatura':
+                    ambiente.setTemperaturaEquilibrio(mensagem[2])
+                    conexao.send(json.dumps('Temperatura configurada para ',mensagem[2]).encode())
+                if mensagem[1]=='umidade':
+                    ambiente.setUmidadeEquilibrio(mensagem[2])
+                    conexao.send(json.dumps('Umidade configurada para ',mensagem[2]).encode())
+                if mensagem[1]=='luminosidade':
+                    ambiente.setLuminosidade(mensagem[2])
+                    conexao.send(json.dumps('Luminosidade configurada para ',mensagem[2]).encode())
 
 
 server_ip = '127.0.0.1'
@@ -91,3 +91,5 @@ t_1.start()
 t_2.start()
 
 t_3.start()
+
+t_4.start()
