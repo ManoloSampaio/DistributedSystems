@@ -19,11 +19,41 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='calculadora.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\x11\x63\x61lculadora.proto\">\n\x0bRequestCalc\x12\r\n\x05num_1\x18\x01 \x01(\x02\x12\r\n\x05num_2\x18\x02 \x01(\x02\x12\x11\n\toperation\x18\x03 \x01(\x05\"\x1d\n\x0cResponseCalc\x12\r\n\x05value\x18\x01 \x01(\x02\x62\x06proto3')
+  serialized_pb=_b('\n\x11\x63\x61lculadora.proto\"\x81\x01\n\x0bRequestCalc\x12\r\n\x05num_1\x18\x01 \x01(\x02\x12\r\n\x05num_2\x18\x02 \x01(\x02\x12\"\n\x02op\x18\x03 \x01(\x0e\x32\x16.RequestCalc.operation\"0\n\toperation\x12\x07\n\x03SUM\x10\x00\x12\x07\n\x03MIN\x10\x01\x12\x07\n\x03\x44IV\x10\x02\x12\x08\n\x04MULT\x10\x03\"\x1d\n\x0cResponseCalc\x12\r\n\x05value\x18\x01 \x01(\x02\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
+
+_REQUESTCALC_OPERATION = _descriptor.EnumDescriptor(
+  name='operation',
+  full_name='RequestCalc.operation',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='SUM', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MIN', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DIV', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MULT', index=3, number=3,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=103,
+  serialized_end=151,
+)
+_sym_db.RegisterEnumDescriptor(_REQUESTCALC_OPERATION)
 
 
 _REQUESTCALC = _descriptor.Descriptor(
@@ -48,8 +78,8 @@ _REQUESTCALC = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='operation', full_name='RequestCalc.operation', index=2,
-      number=3, type=5, cpp_type=1, label=1,
+      name='op', full_name='RequestCalc.op', index=2,
+      number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -59,6 +89,7 @@ _REQUESTCALC = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
+    _REQUESTCALC_OPERATION,
   ],
   options=None,
   is_extendable=False,
@@ -66,8 +97,8 @@ _REQUESTCALC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=21,
-  serialized_end=83,
+  serialized_start=22,
+  serialized_end=151,
 )
 
 
@@ -97,10 +128,12 @@ _RESPONSECALC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=85,
-  serialized_end=114,
+  serialized_start=153,
+  serialized_end=182,
 )
 
+_REQUESTCALC.fields_by_name['op'].enum_type = _REQUESTCALC_OPERATION
+_REQUESTCALC_OPERATION.containing_type = _REQUESTCALC
 DESCRIPTOR.message_types_by_name['RequestCalc'] = _REQUESTCALC
 DESCRIPTOR.message_types_by_name['ResponseCalc'] = _RESPONSECALC
 
