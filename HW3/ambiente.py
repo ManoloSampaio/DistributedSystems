@@ -2,6 +2,7 @@ import socket
 from _thread import *
 import threading 
 import time
+<<<<<<< HEAD
 import EnvMsg_pb2
 class Ambiente():
     def __init__(self,server_ip,server_port,temp,lum,umidade):
@@ -74,3 +75,96 @@ class Ambiente():
                 msg=EnvMsg_pb2.ToSensor()
                 msg.variable = self.luminosidade
                 sensor.send(msg.SerializeToString())
+=======
+import json
+
+class Ambiente():
+    def __init__(self,server_ip,server_port):
+        self.ambiente_socket = socket.socket(socket.AF_INET, 
+                                           socket.SOCK_STREAM)
+        self.ambiente_socket.bind((server_ip, server_port))
+        self.ambiente_socket.listen()
+        self.conexoes=[]
+        self.TemperaturaEquilibrio=25
+        self.Temperatura=0
+        self.Luminosidade=0
+        self.UmidadeEquilibrio=50
+        self.Umidade=0
+
+    def setTemperaturaEquilibrio(self,temperatura):
+        self.TemperaturaEquilibrio=temperatura
+
+    def variacaoTemperatura(self):
+        self.Temperatura=self.TemperaturaEquilibrio*0.1+self.Temperatura*0.9
+
+    def setLuminosidade(self,luminosidade):
+        self.Luminosidade=luminosidade
+
+    def setUmidadeEquilibrio(self,umidadeEquilibrio):
+        self.UmidadeEquilibrio=umidadeEquilibrio
+
+    def variacaoUmidade(self):
+        self.Umidade=self.UmidadeEquilibrio*0.1+self.Umidade*0.9
+
+
+def variacaoTemperatura(ambiente):
+    while 1:
+        ambiente.variacaoTemperatura()
+        time.sleep(1)
+def variacaoUmidade(ambiente):
+    while 1:
+        ambiente.variacaoUmidade()
+        time.sleep(1)
+def add_conexoes(ambiente):
+    while 1:
+        conexao,addr = ambiente.ambiente_socket.accept()
+        if conexao:
+            print('Achou')
+            ambiente.conexoes.append(conexao)
+def listen_request(ambiente):
+    while 1:
+        for conexao in ambiente.conexoes:
+            mensagem=conexao.recv(1024).decode()
+            mensagem_vetor=json.loads(mensagem)
+            if mensagem[0]=='sensor':
+                if mensagem[1]=='temperatura':
+                    conexao.send(json.dumps(['pedido aceito',ambiente.Temperatura]).encode())
+                if mensagem[1]=='umidade':
+                    conexao.send(json.dumps(['pedido aceito',ambiente.Umidade]).encode())
+                if mensagem[1]=='luminosidade':
+                    conexao.send(json.dumps(['pedido aceito',ambiente.Luminosidade]).encode())
+            elif mensagem[0]=='atuador':
+                if mensagem[1]=='temperatura':
+                    ambiente.setTemperaturaEquilibrio(mensagem[2])
+                    conexao.send(json.dumps('Temperatura configurada para ',mensagem[2]).encode())
+                if mensagem[1]=='umidade':
+                    ambiente.setUmidadeEquilibrio(mensagem[2])
+                    conexao.send(json.dumps('Umidade configurada para ',mensagem[2]).encode())
+                if mensagem[1]=='luminosidade':
+                    ambiente.setLuminosidade(mensagem[2])
+                    conexao.send(json.dumps('Luminosidade configurada para ',mensagem[2]).encode())
+
+
+server_ip = '127.0.0.1'
+server_port = 65433
+
+ambiente = Ambiente(server_ip,server_port)
+
+print("Simulação do Ambiente iniciada")
+
+t_1 = threading.Thread(target=variacaoTemperatura, args=(ambiente,))
+
+t_2 = threading.Thread(target=variacaoUmidade, args=(ambiente,))
+
+t_3 = threading.Thread(target=add_conexoes, args=(ambiente,))
+
+t_4 = threading.Thread(target=listen_request, args=(ambiente,))
+
+t_1.start()
+
+t_2.start()
+
+t_3.start()
+
+t_4.start()
+>>>>>>> b3c244f6a12da9452e91c20fe3409b925f85120c
