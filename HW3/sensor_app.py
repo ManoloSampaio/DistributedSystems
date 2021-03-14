@@ -13,7 +13,8 @@ def get_data(s):
 sensor_type = int(input('Digite o tipo de sensor:' ))
 sensor_name = input('Digite o nome do sensor: ')
 
-s=Sensor('localhost',65433,sensor_type,sensor_name)
+s=Sensor('localhost',50000,sensor_type,sensor_name)
+s.get_data()
 
 t_1 = threading.Thread(target = send_data,args=(s,))
 t_2 = threading.Thread(target = get_data,args=(s,))

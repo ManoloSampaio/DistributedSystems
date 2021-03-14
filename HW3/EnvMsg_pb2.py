@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='EnvMsg.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\x0c\x45nvMsg.proto\"\x1c\n\x08ToSensor\x12\x10\n\x08variable\x18\x01 \x01(\x02\"r\n\nFromSensor\x12$\n\x04type\x18\x01 \x01(\x0e\x32\x16.FromSensor.sensortype\x12\x12\n\nqueue_name\x18\x02 \x01(\t\"*\n\nsensortype\x12\x08\n\x04UMID\x10\x00\x12\x08\n\x04TEMP\x10\x01\x12\x08\n\x04LUMN\x10\x02\"\x8e\x01\n\x0c\x46romActuator\x12(\n\x04type\x18\x01 \x01(\x0e\x32\x1a.FromActuator.actuatortype\x12\x10\n\x08variable\x18\x02 \x01(\x02\x12\x14\n\x0cgrpc_address\x18\x03 \x01(\t\",\n\x0c\x61\x63tuatortype\x12\x08\n\x04UMID\x10\x00\x12\x08\n\x04TEMP\x10\x01\x12\x08\n\x04LUMN\x10\x02\"\xa0\x01\n\x0eToHomeAssitent\x12(\n\x04type\x18\x01 \x01(\x0e\x32\x1a.ToHomeAssitent.objecttype\x12\x13\n\x0bobject_name\x18\x02 \x01(\t\x12\x12\n\nqueue_name\x18\x03 \x01(\t\x12\x14\n\x0cgrpc_address\x18\x04 \x01(\t\"%\n\nobjecttype\x12\n\n\x06SENSOR\x10\x00\x12\x0b\n\x07\x41TUATOR\x10\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0c\x45nvMsg.proto\"\x1c\n\x08ToSensor\x12\x10\n\x08variable\x18\x01 \x01(\x02\"r\n\nFromSensor\x12$\n\x04type\x18\x01 \x01(\x0e\x32\x16.FromSensor.sensortype\x12\x12\n\nqueue_name\x18\x02 \x01(\t\"*\n\nsensortype\x12\x08\n\x04UMID\x10\x00\x12\x08\n\x04TEMP\x10\x01\x12\x08\n\x04LUMN\x10\x02\"\xa3\x01\n\x0c\x46romActuator\x12(\n\x04type\x18\x01 \x01(\x0e\x32\x1a.FromActuator.actuatortype\x12\x10\n\x08variable\x18\x02 \x01(\x02\x12\x14\n\x0cgrpc_address\x18\x03 \x01(\t\x12\x13\n\x0bobject_name\x18\x04 \x01(\t\",\n\x0c\x61\x63tuatortype\x12\x08\n\x04UMID\x10\x00\x12\x08\n\x04TEMP\x10\x01\x12\x08\n\x04LUMN\x10\x02\"\xa0\x01\n\x0eToHomeAssitent\x12(\n\x04type\x18\x01 \x01(\x0e\x32\x1a.ToHomeAssitent.objecttype\x12\x13\n\x0bobject_name\x18\x02 \x01(\t\x12\x12\n\nqueue_name\x18\x03 \x01(\t\x12\x14\n\x0cgrpc_address\x18\x04 \x01(\t\"%\n\nobjecttype\x12\n\n\x06SENSOR\x10\x00\x12\x0b\n\x07\x41TUATOR\x10\x01\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -72,8 +72,8 @@ _FROMACTUATOR_ACTUATORTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=261,
-  serialized_end=305,
+  serialized_start=282,
+  serialized_end=326,
 )
 _sym_db.RegisterEnumDescriptor(_FROMACTUATOR_ACTUATORTYPE)
 
@@ -94,8 +94,8 @@ _TOHOMEASSITENT_OBJECTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=431,
-  serialized_end=468,
+  serialized_start=452,
+  serialized_end=489,
 )
 _sym_db.RegisterEnumDescriptor(_TOHOMEASSITENT_OBJECTTYPE)
 
@@ -198,6 +198,13 @@ _FROMACTUATOR = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='object_name', full_name='FromActuator.object_name', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -212,7 +219,7 @@ _FROMACTUATOR = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=163,
-  serialized_end=305,
+  serialized_end=326,
 )
 
 
@@ -264,8 +271,8 @@ _TOHOMEASSITENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=308,
-  serialized_end=468,
+  serialized_start=329,
+  serialized_end=489,
 )
 
 _FROMSENSOR.fields_by_name['type'].enum_type = _FROMSENSOR_SENSORTYPE

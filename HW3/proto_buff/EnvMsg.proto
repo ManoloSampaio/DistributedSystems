@@ -15,6 +15,7 @@ message FromActuator{
     actuatortype type=1;
     float variable=2;
     string grpc_address =3;
+    string object_name =4;
     enum actuatortype{
         UMID=0;
         TEMP=1;

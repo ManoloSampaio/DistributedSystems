@@ -3,6 +3,7 @@ import struct
 import sys
 import HAgrpc_pb2
 import HAgrpc_pb2_grpc
+import app_pb2
 class Gateway():
     def __init__(self):
         
@@ -15,6 +16,8 @@ class Gateway():
 
         self.client_vector = []
         self.object_dict = {}
+        self.sensor_dict = {}
+        self.callback_return = ''
         
     def send_to_actuator(self,message,client_ident):
         
@@ -43,3 +46,6 @@ class Gateway():
         if message.object_comands!=[]:
             server_response.object_comands[:] = message.object_comands
         connection.send(server_response.SerializeToString())
+        
+    def callback_sensor(self,ch, method, properties, body,queue):
+        self.sensor_dict[queue]=body.decode('utf-8')

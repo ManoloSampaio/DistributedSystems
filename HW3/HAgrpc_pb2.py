@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0cHAgrpc.proto\"\x94\x01\n\x07Request\x12*\n\x0crequest_type\x18\x01 \x01(\x0e\x32\x14.Request.RequestType\x12\r\n\x05value\x18\x02 \x01(\t\"N\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\r\n\tModStatus\x10\x01\x12\x0b\n\x07ModOnOf\x10\x02\x12\x13\n\x0f\x44iscoverComands\x10\x03\"W\n\x08Response\x12\x0e\n\x06result\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x15\n\robject_status\x18\x03 \x01(\x05\x12\x16\n\x0eobject_comands\x18\x04 \x03(\t2\x9c\x01\n\x0c\x41\x63tuatorGRPC\x12 \n\x07TunrnOn\x12\x08.Request\x1a\t.Response\"\x00\x12!\n\x08TunrnOff\x12\x08.Request\x1a\t.Response\"\x00\x12\"\n\tModStatus\x12\x08.Request\x1a\t.Response\"\x00\x12#\n\nSeeComands\x12\x08.Request\x1a\t.Response\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x0cHAgrpc.proto\"\x7f\n\x07Request\x12*\n\x0crequest_type\x18\x01 \x01(\x0e\x32\x14.Request.RequestType\x12\r\n\x05value\x18\x02 \x01(\t\"9\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\r\n\tModStatus\x10\x01\x12\x0b\n\x07ModOnOf\x10\x02\"W\n\x08Response\x12\x0e\n\x06result\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x15\n\robject_status\x18\x03 \x01(\x05\x12\x16\n\x0eobject_comands\x18\x04 \x03(\t2\x9b\x01\n\x0c\x41\x63tuatorGRPC\x12 \n\x07TunrnOn\x12\x08.Request\x1a\t.Response\"\x00\x12!\n\x08TunrnOff\x12\x08.Request\x1a\t.Response\"\x00\x12\"\n\tModStatus\x12\x08.Request\x1a\t.Response\"\x00\x12\"\n\tSeeStatus\x12\x08.Request\x1a\t.Response\"\x00\x62\x06proto3'
 )
 
 
@@ -46,16 +46,11 @@ _REQUEST_REQUESTTYPE = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='DiscoverComands', index=3, number=3,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=87,
-  serialized_end=165,
+  serialized_start=86,
+  serialized_end=143,
 )
 _sym_db.RegisterEnumDescriptor(_REQUEST_REQUESTTYPE)
 
@@ -95,8 +90,8 @@ _REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17,
-  serialized_end=165,
+  serialized_start=16,
+  serialized_end=143,
 )
 
 
@@ -148,8 +143,8 @@ _RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=167,
-  serialized_end=254,
+  serialized_start=145,
+  serialized_end=232,
 )
 
 _REQUEST.fields_by_name['request_type'].enum_type = _REQUEST_REQUESTTYPE
@@ -181,8 +176,8 @@ _ACTUATORGRPC = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=257,
-  serialized_end=413,
+  serialized_start=235,
+  serialized_end=390,
   methods=[
   _descriptor.MethodDescriptor(
     name='TunrnOn',
@@ -215,8 +210,8 @@ _ACTUATORGRPC = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
-    name='SeeComands',
-    full_name='ActuatorGRPC.SeeComands',
+    name='SeeStatus',
+    full_name='ActuatorGRPC.SeeStatus',
     index=3,
     containing_service=None,
     input_type=_REQUEST,

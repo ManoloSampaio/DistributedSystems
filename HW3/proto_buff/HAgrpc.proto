@@ -6,7 +6,6 @@ message Request{
         ReadStatus = 0;
         ModStatus  = 1;
         ModOnOf = 2;
-        DiscoverComands = 3;
     }
 }
 message Response{
@@ -19,5 +18,5 @@ service ActuatorGRPC{
     rpc TunrnOn(Request)    returns (Response){};
     rpc TunrnOff(Request)   returns (Response){};
     rpc ModStatus(Request)  returns (Response){};
-    rpc SeeComands(Request) returns (Response){};
+    rpc SeeStatus(Request) returns (Response){};
 }

@@ -17,13 +17,10 @@ class Sensor():
         msg.queue_name = sensor_name
         self.sensor_name = sensor_name
         self.sensor_socket.send(msg.SerializeToString())
-        self.variable = 'NULL'        
+        self.variable = -1        
     
     def publish(self):
-        if self.variable!='NULL':
-            mensagem = HAmsg_pb2.HAFromSensor()
-            mensagem.variable = self.variable
-            
+        if self.variable!=-1:
             self.channel.basic_publish(exchange='', 
                               routing_key=self.sensor_name, 
                               body=f'{self.variable}'

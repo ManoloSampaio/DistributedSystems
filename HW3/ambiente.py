@@ -2,7 +2,6 @@ import socket
 from _thread import *
 import threading 
 import time
-<<<<<<< HEAD
 import EnvMsg_pb2
 class Ambiente():
     def __init__(self,server_ip,server_port,temp,lum,umidade):
@@ -56,7 +55,7 @@ class Ambiente():
         
     def sendumid(self):
         if len(self.sensor_dict['0'])!=0:    
-            for sensor in self.umidade_sensors:
+            for sensor in self.sensor_dict['0']:
                 msg=EnvMsg_pb2.ToSensor()
                 msg.variable = self.umidade
                 sensor.send(msg.SerializeToString())
@@ -64,18 +63,18 @@ class Ambiente():
                 
     def sendtemp(self):
         if len(self.sensor_dict['1'])!=0:
-            for sensor in self.temp_sensors:
+            for sensor in self.sensor_dict['1']:
                 msg=EnvMsg_pb2.ToSensor()
                 msg.variable = self.temperatura
                 sensor.send(msg.SerializeToString())
 
     def sendlum(self):
         if len(self.sensor_dict['2'])!=0:
-            for sensor in self.lum_sensor:
+            for sensor in self.sensor_dict['2']:
                 msg=EnvMsg_pb2.ToSensor()
                 msg.variable = self.luminosidade
                 sensor.send(msg.SerializeToString())
-=======
+'''
 import json
 
 class Ambiente():
@@ -168,3 +167,4 @@ t_3.start()
 
 t_4.start()
 >>>>>>> b3c244f6a12da9452e91c20fe3409b925f85120c
+'''

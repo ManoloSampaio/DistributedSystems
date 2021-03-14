@@ -49,19 +49,12 @@ def send_message(client):
         
         if command!='/SAIR' and command!='/LIST':
             request_message = app_pb2.Request_APP()
-
-            request_message.request_type = app_pb2.Request_APP().RequestType.VerifyObject
-            request_message.value = command
+            request_message.name = command
+            request_message.request_type=2
+            request_message.aux = 'temp'
+            request_message.value=input('Qual a temperatura desejada')
             client.send_message(request_message.SerializeToString())
-            message= listen_message(client)
-            
-            if message.exists==1:
-                request_message.request_type = app_pb2.Request_APP().RequestType.DiscoverComands
-                request_message.name =command
-                client.send_message(request_message.SerializeToString())
-                message = listen_message(client)
-                
-                        
+            message = listen_message(client)                
 
     
 server_ip = '127.0.0.1'
