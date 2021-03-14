@@ -12,6 +12,7 @@ class Sensor():
         self.channel.queue_declare(queue=sensor_name)
         self.sensor_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sensor_socket.connect((ambiente_ip,50000))
+        
         msg = EnvMsg_pb2.FromSensor()
         msg.type = sensor_type
         msg.queue_name = sensor_name

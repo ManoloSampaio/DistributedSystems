@@ -34,7 +34,7 @@ if command == 2:
     obj = Umidificador(Nome_Dispositivo,umi_value,'localhost',52000,grpc_port)
 if command == 3:
     temp = float(input('Initial Temperature Set'))
-    obj = Umidificador(Nome_Dispositivo,temp,'localhost',52000,grpc_port)
+    obj = ArCodicionado(Nome_Dispositivo,temp,'localhost',52000,grpc_port)
 
 try:
     t_1 = threading.Thread(target = send_data,args=(obj,))      
