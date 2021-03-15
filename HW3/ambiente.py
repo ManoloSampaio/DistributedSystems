@@ -59,6 +59,14 @@ class Ambiente():
                 msg=EnvMsg_pb2.ToSensor()
                 msg.variable = self.luminosidade
                 sensor.send(msg.SerializeToString())
+
+    def variacaoTemperatura(self):
+        self.temperatura=(self.temperatura_equilibrio*0.1
+                          +self.temperatura*0.9)
+    
+    def variacaoUmidade(self):
+        self.umidade=(self.umidade_equilibrio*0.1
+                      +self.umidade*0.9)
 '''
 import json
 

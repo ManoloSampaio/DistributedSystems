@@ -2,8 +2,7 @@ import pika
 from _thread import *
 import threading 
 import json
-def GrpcRequest(self,client_request):
-    
+
 def callback_1(ch, method, properties, body):
     print("(Sensor 1) Received %r" % body)
 
