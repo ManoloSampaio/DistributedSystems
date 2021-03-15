@@ -30,28 +30,13 @@ class Ambiente():
         msg.ParseFromString(connection.recv(1024))
         
         if msg.type==0:
-            self.umidade=self.umidade+0.5*msg.variable
+            self.umidade=self.umidade*0.8+0.2*msg.variable
             
         if msg.type==1:
-            if self.temperatura<msg.variable:
-                self.temperatura=self.temperatura+0.5
-            if self.temperatura>msg.variable:
-                self.temperatura=self.temperatura-0.5
+            self.temperatura=self.temperatura*0.9+0.1*msg.variable
         
         if msg.type==2:
-            if msg.value>0:
-                self.luminosidade=self.luminosidade+msg.variable
-            if msg.value<0:
-                self.luminosidade=self.luminosidade-msg.variable
-        
-        
-    def variacaoTemperatura(self):
-        self.temperatura=(self.temperatura_equilibrio*0.1
-                          +self.temperatura*0.9)
-    
-    def variacaoUmidade(self):
-        self.umidade=(self.umidade_equilibrio*0.1
-                      +self.umidade*0.9)
+            self.luminosidade=msg.variable
         
     def sendumid(self):
         if len(self.sensor_dict['0'])!=0:    
