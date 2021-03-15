@@ -2,7 +2,7 @@ syntax = "proto3";
 
 message Request_APP{
     RequestType request_type =1;
-    string value = 2;
+    float value = 2;
     string name = 3;   
     string aux =4;
     enum RequestType{
@@ -12,15 +12,15 @@ message Request_APP{
         ModOnOf=3;
         DiscoverComands= 4;
         ListObjects = 5;
-        VerifyObject = 6;
-        LogOut =7;
+        VerifyActuator = 6;
+        VerifySensor = 7;
+        LogOut =8;
     }
 }
 message Response_APP{
     string object_name =1;
-    string object_result =2;
+    float object_result =2;
     string list_object= 3;
-    int32 exists = 4;
-    bool object_status =5;
-    repeated string object_comands =6;
+    string on_off_status=4;
+    repeated string object_comands =5;
 }

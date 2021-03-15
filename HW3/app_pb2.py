@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='app.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\tapp.proto\"\xf7\x01\n\x0bRequest_APP\x12.\n\x0crequest_type\x18\x01 \x01(\x0e\x32\x18.Request_APP.RequestType\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0b\n\x03\x61ux\x18\x04 \x01(\t\"\x8d\x01\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\x0e\n\nReadSensor\x10\x01\x12\r\n\tModStatus\x10\x02\x12\x0b\n\x07ModOnOf\x10\x03\x12\x13\n\x0f\x44iscoverComands\x10\x04\x12\x0f\n\x0bListObjects\x10\x05\x12\x10\n\x0cVerifyObject\x10\x06\x12\n\n\x06LogOut\x10\x07\"\x8e\x01\n\x0cResponse_APP\x12\x13\n\x0bobject_name\x18\x01 \x01(\t\x12\x15\n\robject_result\x18\x02 \x01(\t\x12\x13\n\x0blist_object\x18\x03 \x01(\t\x12\x0e\n\x06\x65xists\x18\x04 \x01(\x05\x12\x15\n\robject_status\x18\x05 \x01(\x08\x12\x16\n\x0eobject_comands\x18\x06 \x03(\tb\x06proto3')
+  serialized_pb=_b('\n\tapp.proto\"\x8b\x02\n\x0bRequest_APP\x12.\n\x0crequest_type\x18\x01 \x01(\x0e\x32\x18.Request_APP.RequestType\x12\r\n\x05value\x18\x02 \x01(\x02\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0b\n\x03\x61ux\x18\x04 \x01(\t\"\xa1\x01\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\x0e\n\nReadSensor\x10\x01\x12\r\n\tModStatus\x10\x02\x12\x0b\n\x07ModOnOf\x10\x03\x12\x13\n\x0f\x44iscoverComands\x10\x04\x12\x0f\n\x0bListObjects\x10\x05\x12\x12\n\x0eVerifyActuator\x10\x06\x12\x10\n\x0cVerifySensor\x10\x07\x12\n\n\x06LogOut\x10\x08\"~\n\x0cResponse_APP\x12\x13\n\x0bobject_name\x18\x01 \x01(\t\x12\x15\n\robject_result\x18\x02 \x01(\x02\x12\x13\n\x0blist_object\x18\x03 \x01(\t\x12\x15\n\ron_off_status\x18\x04 \x01(\t\x12\x16\n\x0eobject_comands\x18\x05 \x03(\tb\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -56,18 +56,22 @@ _REQUEST_APP_REQUESTTYPE = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='VerifyObject', index=6, number=6,
+      name='VerifyActuator', index=6, number=6,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LogOut', index=7, number=7,
+      name='VerifySensor', index=7, number=7,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LogOut', index=8, number=8,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=120,
-  serialized_end=261,
+  serialized_end=281,
 )
 _sym_db.RegisterEnumDescriptor(_REQUEST_APP_REQUESTTYPE)
 
@@ -88,8 +92,8 @@ _REQUEST_APP = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='value', full_name='Request_APP.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -121,7 +125,7 @@ _REQUEST_APP = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=14,
-  serialized_end=261,
+  serialized_end=281,
 )
 
 
@@ -141,8 +145,8 @@ _RESPONSE_APP = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='object_result', full_name='Response_APP.object_result', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -154,22 +158,15 @@ _RESPONSE_APP = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='exists', full_name='Response_APP.exists', index=3,
-      number=4, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='on_off_status', full_name='Response_APP.on_off_status', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='object_status', full_name='Response_APP.object_status', index=4,
-      number=5, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='object_comands', full_name='Response_APP.object_comands', index=5,
-      number=6, type=9, cpp_type=9, label=3,
+      name='object_comands', full_name='Response_APP.object_comands', index=4,
+      number=5, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -186,8 +183,8 @@ _RESPONSE_APP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=264,
-  serialized_end=406,
+  serialized_start=283,
+  serialized_end=409,
 )
 
 _REQUEST_APP.fields_by_name['request_type'].enum_type = _REQUEST_APP_REQUESTTYPE

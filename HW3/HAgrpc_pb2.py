@@ -19,40 +19,10 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0cHAgrpc.proto\"\x7f\n\x07Request\x12*\n\x0crequest_type\x18\x01 \x01(\x0e\x32\x14.Request.RequestType\x12\r\n\x05value\x18\x02 \x01(\t\"9\n\x0bRequestType\x12\x0e\n\nReadStatus\x10\x00\x12\r\n\tModStatus\x10\x01\x12\x0b\n\x07ModOnOf\x10\x02\"W\n\x08Response\x12\x0e\n\x06result\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x15\n\robject_status\x18\x03 \x01(\x05\x12\x16\n\x0eobject_comands\x18\x04 \x03(\t2\x9b\x01\n\x0c\x41\x63tuatorGRPC\x12 \n\x07TunrnOn\x12\x08.Request\x1a\t.Response\"\x00\x12!\n\x08TunrnOff\x12\x08.Request\x1a\t.Response\"\x00\x12\"\n\tModStatus\x12\x08.Request\x1a\t.Response\"\x00\x12\"\n\tSeeStatus\x12\x08.Request\x1a\t.Response\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x0cHAgrpc.proto\"\x18\n\x07Request\x12\r\n\x05value\x18\x01 \x01(\x02\"W\n\x08Response\x12\x0e\n\x06result\x18\x01 \x01(\x02\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x15\n\ron_off_status\x18\x03 \x01(\t\x12\x16\n\x0eobject_comands\x18\x04 \x03(\t2\xc0\x01\n\x0c\x41\x63tuatorGRPC\x12 \n\x07TunrnOn\x12\x08.Request\x1a\t.Response\"\x00\x12!\n\x08TunrnOff\x12\x08.Request\x1a\t.Response\"\x00\x12\"\n\tModStatus\x12\x08.Request\x1a\t.Response\"\x00\x12\"\n\tSeeStatus\x12\x08.Request\x1a\t.Response\"\x00\x12#\n\nSeeComands\x12\x08.Request\x1a\t.Response\"\x00\x62\x06proto3'
 )
 
 
-
-_REQUEST_REQUESTTYPE = _descriptor.EnumDescriptor(
-  name='RequestType',
-  full_name='Request.RequestType',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='ReadStatus', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='ModStatus', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='ModOnOf', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=86,
-  serialized_end=143,
-)
-_sym_db.RegisterEnumDescriptor(_REQUEST_REQUESTTYPE)
 
 
 _REQUEST = _descriptor.Descriptor(
@@ -64,16 +34,9 @@ _REQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='request_type', full_name='Request.request_type', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='Request.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      name='value', full_name='Request.value', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -82,7 +45,6 @@ _REQUEST = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _REQUEST_REQUESTTYPE,
   ],
   serialized_options=None,
   is_extendable=False,
@@ -91,7 +53,7 @@ _REQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=16,
-  serialized_end=143,
+  serialized_end=40,
 )
 
 
@@ -105,8 +67,8 @@ _RESPONSE = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='result', full_name='Response.result', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -118,9 +80,9 @@ _RESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='object_status', full_name='Response.object_status', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='on_off_status', full_name='Response.on_off_status', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -143,12 +105,10 @@ _RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=145,
-  serialized_end=232,
+  serialized_start=42,
+  serialized_end=129,
 )
 
-_REQUEST.fields_by_name['request_type'].enum_type = _REQUEST_REQUESTTYPE
-_REQUEST_REQUESTTYPE.containing_type = _REQUEST
 DESCRIPTOR.message_types_by_name['Request'] = _REQUEST
 DESCRIPTOR.message_types_by_name['Response'] = _RESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -176,8 +136,8 @@ _ACTUATORGRPC = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=235,
-  serialized_end=390,
+  serialized_start=132,
+  serialized_end=324,
   methods=[
   _descriptor.MethodDescriptor(
     name='TunrnOn',
@@ -213,6 +173,16 @@ _ACTUATORGRPC = _descriptor.ServiceDescriptor(
     name='SeeStatus',
     full_name='ActuatorGRPC.SeeStatus',
     index=3,
+    containing_service=None,
+    input_type=_REQUEST,
+    output_type=_RESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='SeeComands',
+    full_name='ActuatorGRPC.SeeComands',
+    index=4,
     containing_service=None,
     input_type=_REQUEST,
     output_type=_RESPONSE,

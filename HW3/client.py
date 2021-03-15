@@ -16,3 +16,39 @@ class SmartRoomClient():
         
     def send_message(self,message):
         self.client_socket.send(message)
+    
+    def discover_comands(self,object_name):
+        request = app_pb2.Request_APP()
+        request.request_type = 4
+        request.name = object_name
+        
+        self.client_socket.send(request.SerializeToString())
+        msg = self.client_socket.recv(1024)
+        
+        mensage = app_pb2.Response_APP()
+        mensage.ParseFromString(msg)
+        return mensage.object_comands
+    
+    def discover_atuator(self,object_name):
+        request_message = app_pb2.Request_APP()
+        request_message.request_type = app_pb2.Request_APP().RequestType.VerifyActuator
+        self.send_message(request_message.SerializeToString())
+        message =self.read_message()
+        
+        if object_name in message.list_object:
+            return True
+        else:
+            print('Atuador Nao Encontrado')
+            return False
+    
+    def discover_sensor(self,object_name):
+        request_message = app_pb2.Request_APP()
+        request_message.request_type = app_pb2.Request_APP().RequestType.VerifySensor
+        self.send_message(request_message.SerializeToString())
+        message =self.read_message()
+        
+        if object_name in message.list_object:
+            return True
+        else:
+            print('Sensor Nao Encontrado')
+            return False

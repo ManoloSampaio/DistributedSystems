@@ -17,7 +17,9 @@ class Gateway():
         self.client_vector = []
         self.object_dict = {}
         self.sensor_dict = {}
-        self.callback_return = ''
+        self.sensor_dict_values ={}
+        self.sensores = []
+        self.atuadores= []
         
     def send_to_actuator(self,message,client_ident):
         

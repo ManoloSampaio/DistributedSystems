@@ -29,6 +29,11 @@ class ActuatorGRPCStub(object):
                 request_serializer=HAgrpc__pb2.Request.SerializeToString,
                 response_deserializer=HAgrpc__pb2.Response.FromString,
                 )
+        self.SeeStatus = channel.unary_unary(
+                '/ActuatorGRPC/SeeStatus',
+                request_serializer=HAgrpc__pb2.Request.SerializeToString,
+                response_deserializer=HAgrpc__pb2.Response.FromString,
+                )
         self.SeeComands = channel.unary_unary(
                 '/ActuatorGRPC/SeeComands',
                 request_serializer=HAgrpc__pb2.Request.SerializeToString,
@@ -57,6 +62,12 @@ class ActuatorGRPCServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SeeStatus(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def SeeComands(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -78,6 +89,11 @@ def add_ActuatorGRPCServicer_to_server(servicer, server):
             ),
             'ModStatus': grpc.unary_unary_rpc_method_handler(
                     servicer.ModStatus,
+                    request_deserializer=HAgrpc__pb2.Request.FromString,
+                    response_serializer=HAgrpc__pb2.Response.SerializeToString,
+            ),
+            'SeeStatus': grpc.unary_unary_rpc_method_handler(
+                    servicer.SeeStatus,
                     request_deserializer=HAgrpc__pb2.Request.FromString,
                     response_serializer=HAgrpc__pb2.Response.SerializeToString,
             ),
@@ -142,6 +158,23 @@ class ActuatorGRPC(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ActuatorGRPC/ModStatus',
+            HAgrpc__pb2.Request.SerializeToString,
+            HAgrpc__pb2.Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SeeStatus(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ActuatorGRPC/SeeStatus',
             HAgrpc__pb2.Request.SerializeToString,
             HAgrpc__pb2.Response.FromString,
             options, channel_credentials,
