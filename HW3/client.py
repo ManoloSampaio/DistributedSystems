@@ -38,7 +38,6 @@ class SmartRoomClient():
         if object_name in message.list_object:
             return True
         else:
-            print('Atuador Nao Encontrado')
             return False
     
     def discover_sensor(self,object_name):
@@ -50,5 +49,4 @@ class SmartRoomClient():
         if object_name in message.list_object:
             return True
         else:
-            print('Sensor Nao Encontrado')
             return False

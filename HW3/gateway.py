@@ -4,6 +4,7 @@ import sys
 import HAgrpc_pb2
 import HAgrpc_pb2_grpc
 import app_pb2
+
 class Gateway():
     def __init__(self):
         
@@ -21,20 +22,6 @@ class Gateway():
         self.sensores = []
         self.atuadores= []
         
-    def send_to_actuator(self,message,client_ident):
-        
-                
-        stub=HAgrpc_pb2_grpc.ActuatorGRPCStub()
-        request = HAgrpc_pb2.Request(Value=message.value)    
-        
-        if message.type==1:
-            response=stub.ModStatusOn(request)
-        if message.type==2:
-            response=stub.TunrnOn(request)
-        if message.type==3:
-            response=stub.SeeComands(request)
-        return response
-    
     def remove_user(self,connection_user):
         for i in range(len(self.client_vector)):
             if self.client_vector[i]==connection_user:
@@ -50,4 +37,5 @@ class Gateway():
         connection.send(server_response.SerializeToString())
         
     def callback_sensor(self,ch, method, properties, body,queue):
-        self.sensor_dict[queue]=body.decode('utf-8')
+        self.sensor_dict[queue]=float(body.decode('utf-8'))
+     

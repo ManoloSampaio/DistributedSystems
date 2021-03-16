@@ -48,6 +48,7 @@ def listen_app_users(connection,address):
                     msg=stub.ModStatus(request)
                     response.object_name   = msg.name
                     response.object_result = msg.result 
+                    response.response_type =0
                     connection.send(response.SerializeToString())
                             
                 if user_request.request_type==3:
@@ -57,11 +58,12 @@ def listen_app_users(connection,address):
                     
                     if user_request.aux=='OFF':
                         msg=stub.TunrnOff(request)
-                    
+                        response.on_off_status = 'Dispositivo Esta OFF'
                     if user_request.aux=='ON':
                         msg=stub.TunrnOn(request)
+                        response.on_off_status = 'Dispositivo Esta ON' 
                     response.object_name   = msg.name
-                    response.on_off_status = msg.on_off_status 
+                    response.response_type =1       
                     connection.send(response.SerializeToString())
                 
                 if user_request.request_type==4:
@@ -76,25 +78,23 @@ def listen_app_users(connection,address):
             else:
                 server_response = app_pb2.Response_APP()
                 server_response.object_name = 'NOT EXISTS'
+                server_response.response_type=2
                 connection.send(server_response.SerializeToString())
                 
         if user_request.request_type==5:
             server_response = app_pb2.Response_APP()
             server_response.object_name = 'LIST OBJECTS'
             server_response.list_object = str(list(HA.object_dict.keys()))
+            server_response.response_type=2
             connection.send(server_response.SerializeToString())
         
         if user_request.request_type==6:
             server_response = app_pb2.Response_APP()
-            server_response.object_name = 'LIST OBJECTS'
-            
             server_response.list_object = str(HA.atuadores)
             connection.send(server_response.SerializeToString())
         
         if user_request.request_type==7:
             server_response = app_pb2.Response_APP()
-            server_response.object_name = 'LIST OBJECTS'
-            
             server_response.list_object = str(HA.sensores)
             connection.send(server_response.SerializeToString())                
         
@@ -108,8 +108,10 @@ def add_object(connection):
         msg_response=EnvMsg_pb2.ToHomeAssitent()
         msg = connection.recv(1024)
         msg_response.ParseFromString(msg)
-        if msg=='':
-            break
+        
+        if msg.decode() =='':
+           break
+        
         if msg_response.type==0:
             connection_rabbit = pika.BlockingConnection(
                                 pika.ConnectionParameters(
@@ -124,22 +126,25 @@ def add_object(connection):
                             msg_response.queue_name,HA,))
         
         if msg_response.type==1:
-            print(msg_response.grpc_address)
             channel = grpc.insecure_channel(f'localhost:{msg_response.grpc_address}',
                       options=(('grpc.enable_http_proxy', 0),))
+            
             HA.object_dict[msg_response.object_name]=channel 
             HA.atuadores.append(msg_response.object_name)
 
 def listen_sensor(channel,queue_name,HA):
-    while True:
-        
+    try:
         channel.basic_consume(
                 queue_name, 
-                lambda ch, method, properties, body: HA.callback_sensor(ch, method, properties, body,queue=queue_name), 
+                lambda ch, method, properties, body: HA.callback_sensor(ch, method, properties, body,
+                                                                        queue=queue_name), 
                 auto_ack=True
                 )
-        channel.start_consuming()
         
+        while True:
+            channel.start_consuming()
+    except:
+        print('Fila Inexistente')    
         
 
 
@@ -157,4 +162,4 @@ t_1 = threading.Thread(target = add_object,args=(connection,))
 t_2 = threading.Thread(target = add_app_users,args=(HA,))
 
 t_1.start()
-t_2.start() 
+t_2.start()

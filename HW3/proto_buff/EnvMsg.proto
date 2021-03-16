@@ -1,7 +1,11 @@
 syntax = "proto3";
+
+
+
 message ToSensor{
     float variable=1;
 }
+
 message FromSensor{
     sensortype type=1;
     string queue_name=2;
@@ -11,6 +15,7 @@ message FromSensor{
         LUMN=2;
     }
 }
+
 message FromActuator{
     actuatortype type=1;
     float variable=2;
@@ -22,6 +27,8 @@ message FromActuator{
         LUMN=2;
     }
 }
+
+
 message ToHomeAssitent{
     objecttype type =1;
     string object_name =2;

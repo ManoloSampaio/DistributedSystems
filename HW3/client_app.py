@@ -7,12 +7,17 @@ from client import SmartRoomClient
 def listen_message(client):
     message =client.read_message()
     
-    if message.object_name=='LIST OBJECTS':
+    if message.response_type==0:    
+        print(f"({message.object_name}):{message.object_result}")
+        
+    elif message.response_type==1:
+        print(f"({message.object_name}):{message.on_off_status}")
+    
+    elif message.response_type==2:
         print(f"({message.object_name}):{message.list_object}")
     
-    if message.object_name!='LIST OBJECTS' and message.object_name!='EXISTS':
-        
-        print(f"({message.object_name}):{message.object_result}")
+    elif message.response_type==3:
+        print(f"({message.object_name}):{message.object_comands}")
     
     return message
         
@@ -32,14 +37,14 @@ def send_message(client):
             client.send_message(request_message.SerializeToString())
             listen_message(client)
         
-        if command=='/SAIR':
+        elif command=='/SAIR':
             request_message.request_type = app_pb2.Request_APP().RequestType.LogOut
             client.send_message(request_message.SerializeToString())
             client.client_socket.close()
             print("Desligando APP")
             break
         
-        if command!='/SAIR' and command!='/LIST' and client.discover_atuator(command)==True:
+        elif client.discover_atuator(command)==True:
             lista_comandos = client.discover_comands(command)
             print(lista_comandos)
             comando = input('Digite o comando: ')
@@ -82,9 +87,12 @@ def send_message(client):
                 
                 client.send_message(request_message.SerializeToString())
                 message = listen_message(client)                
-        elif command!='/SAIR' and command!='/LIST' and client.discover_sensor(command)==True:            
+        
+        elif client.discover_sensor(command)==True:            
                 request_message.request_type = 1
-                request_message.name = command
+                request_message.name = command    
+                client.send_message(request_message.SerializeToString())
+                message = listen_message(client)
 
 server_ip = '127.0.0.1'
 server_port = 65433
