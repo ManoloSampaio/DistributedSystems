@@ -11,7 +11,7 @@ class Sensor():
         self.channel = connection.channel()
         self.channel.queue_declare(queue=sensor_name)
         self.sensor_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sensor_socket.connect((ambiente_ip,50000))
+        self.sensor_socket.connect((ambiente_ip,ambiente_port))
         
         msg = EnvMsg_pb2.FromSensor()
         msg.type = sensor_type
@@ -30,3 +30,4 @@ class Sensor():
         messagem_env = EnvMsg_pb2.ToSensor()
         messagem_env.ParseFromString(self.sensor_socket.recv(1024))    
         self.variable = messagem_env.variable
+    

@@ -20,6 +20,7 @@ def listen_message(client):
         print(f"({message.object_name}):{message.object_comands}")
     
     return message
+
 def listen_sensor(client,command,request_message):
     global follow
     follow =1
