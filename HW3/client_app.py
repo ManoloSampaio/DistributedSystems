@@ -20,7 +20,19 @@ def listen_message(client):
         print(f"({message.object_name}):{message.object_comands}")
     
     return message
+def listen_sensor(client,command,request_message):
+    global follow
+    follow =1
+    while follow!=0:    
+        time.sleep(3.5)
+        request_message.request_type = 1
+        request_message.name = command    
+        client.send_message(request_message.SerializeToString())
+        if follow==0:
+            break
+        message = listen_message(client)
         
+
 def send_message(client):
     while True:
         request_message = app_pb2.Request_APP()
@@ -89,14 +101,14 @@ def send_message(client):
                 message = listen_message(client)                
         
         elif client.discover_sensor(command)==True:            
-                request_message.request_type = 1
-                request_message.name = command    
-                client.send_message(request_message.SerializeToString())
-                message = listen_message(client)
+            global follow
+            follow =1
+            t_2 = threading.Thread(target=listen_sensor, args=(client,command,request_message,))
+            t_2.start()
+            follow=int(input())
 
 server_ip = '127.0.0.1'
 server_port = 65433
-
 client = SmartRoomClient(server_ip,server_port)
 print("Conectando com o servidor")
 
