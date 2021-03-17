@@ -8,6 +8,8 @@ message Response{
     string on_off_status=3;
     repeated string object_comands =4;
 }
+
+
 service ActuatorGRPC{
     rpc TunrnOn(Request)    returns (Response){};
     rpc TunrnOff(Request)   returns (Response){};

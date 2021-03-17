@@ -26,6 +26,7 @@ def communicate_HA(ambiente,msg,type):
         msg_response.queue_name = msg.queue_name
         msg_response.type =0
         ambiente.ambiente_HA_socket.send(msg_response.SerializeToString())
+    
     if type==2:
         msg_response=EnvMsg_pb2.ToHomeAssitent()
         msg_response.grpc_address = msg.grpc_address
@@ -59,7 +60,7 @@ ambiente.ambiente_socket_sensor.listen(1)
 ambiente.ambiente_socket_atuador.bind(('localhost',52000))
 ambiente.ambiente_socket_atuador.listen(1)
 
-ambiente.ambiente_HA_socket.connect(('localhost',40000))
+ambiente.ambiente_HA_socket.connect(('localhost',42000))
 
 t_2 = threading.Thread(target = add_sensor,args=(ambiente,))
 t_1 = threading.Thread(target = send_data,args=(ambiente,))

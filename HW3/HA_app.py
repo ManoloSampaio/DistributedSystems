@@ -46,6 +46,7 @@ def listen_app_users(connection,address):
                     stub=HAgrpc_pb2_grpc.ActuatorGRPCStub(HA.object_dict[user_request.name])
                     request = HAgrpc_pb2.Request(value=user_request.value) 
                     msg=stub.ModStatus(request)
+                    
                     response.object_name   = msg.name
                     response.object_result = msg.result 
                     response.response_type =0
@@ -59,9 +60,11 @@ def listen_app_users(connection,address):
                     if user_request.aux=='OFF':
                         msg=stub.TunrnOff(request)
                         response.on_off_status = 'Dispositivo Esta OFF'
+                    
                     if user_request.aux=='ON':
                         msg=stub.TunrnOn(request)
                         response.on_off_status = 'Dispositivo Esta ON' 
+                    
                     response.object_name   = msg.name
                     response.response_type =1       
                     connection.send(response.SerializeToString())
@@ -117,8 +120,8 @@ def add_object(connection):
                                 pika.ConnectionParameters(
                                 host='localhost'))
             channel = connection_rabbit.channel()
+            
             HA.object_dict[msg_response.queue_name]=channel
-            print(list(HA.object_dict.keys()))
             HA.sensores.append(msg_response.queue_name)
             HA.sensor_dict[f'{msg_response.queue_name}']='NULL'
             start_new_thread(listen_sensor,
@@ -153,7 +156,7 @@ HA =Gateway()
 HA.server_socket_1.bind(('localhost',65433))
 HA.server_socket_1.listen(1)
 
-HA.server_socket_2.bind(('localhost',40000))
+HA.server_socket_2.bind(('localhost',42000))
 HA.server_socket_2.listen(1)
 
 connection,address=HA.server_socket_2.accept()

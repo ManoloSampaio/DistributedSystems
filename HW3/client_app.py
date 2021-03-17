@@ -28,9 +28,9 @@ def listen_sensor(client,command,request_message):
         time.sleep(3.5)
         request_message.request_type = 1
         request_message.name = command    
-        client.send_message(request_message.SerializeToString())
         if follow==0:
             break
+        client.send_message(request_message.SerializeToString())
         message = listen_message(client)
         
 

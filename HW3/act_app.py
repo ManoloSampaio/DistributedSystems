@@ -7,7 +7,7 @@ import HAgrpc_pb2_grpc
 from atuador import Atuador
 
 def server(obj,grpc_port):
-    server = grpc.server(concurrent.futures.ThreadPoolExecutor(max_workers=10))
+    server = grpc.server(concurrent.futures.ThreadPoolExecutor(max_workers=1))
     HAgrpc_pb2_grpc.add_ActuatorGRPCServicer_to_server(obj, server)
     server.add_insecure_port(f'[::]:{grpc_port}')
     server.start()
@@ -30,7 +30,8 @@ try:
     Nome_Dispositivo = input('Nome Dispositivo: ')
 except:
     print('Atributo no identificado')
-obj = Atuador(Nome_Dispositivo,'localhost',52000,grpc_port,lista_comandos,atributo,comand-1)
+obj = Atuador(Nome_Dispositivo,'localhost',52000,
+              grpc_port,lista_comandos,atributo,comand-1)
     
 
 t_1 = threading.Thread(target = send_data,args=(obj,))      

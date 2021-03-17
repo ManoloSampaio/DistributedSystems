@@ -59,11 +59,15 @@ class Atuador(HAgrpc_pb2_grpc.ActuatorGRPCServicer):
         msg = HAgrpc_pb2.Response()
         if self.ON_OFF==True:
             msg.object_comands[:] = self.lista_comandos
+            msg.name  = self.nome 
         else:
             msg.object_comands[:] =['on']
+            msg.name  = f'{self.nome} esta desligado' 
         return msg
     
     def SeeStatus(self,request,context):
         msg = HAgrpc_pb2.Response()
+        msg.name = self.nome
         msg.result = self.atributo_atuacao
+        
         return msg
