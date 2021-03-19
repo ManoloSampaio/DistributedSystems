@@ -145,7 +145,7 @@ def listen_sensor(channel,queue_name,HA):
         
 
 
-HA =Gateway()
+HA =HomeAssistent()
 
 HA.server_socket_1.bind(('localhost',65433))
 HA.server_socket_1.listen(1)
