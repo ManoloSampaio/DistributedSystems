@@ -11,13 +11,13 @@ def listen_message(client):
         print(f"({message.object_name}):{message.object_result}")
         
     elif message.response_type==1:
-        print(f"({message.object_name}):{message.on_off_status}")
+        print(f"({message.object_name}):{message.on_off_status}\n")
     
     elif message.response_type==2:
-        print(f"({message.object_name}):{message.list_object}")
+        print(f"({message.object_name}):{message.list_object}\n")
     
     elif message.response_type==3:
-        print(f"({message.object_name}):{message.object_comands}")
+        print(f"({message.object_name}):{message.object_comands}\n")
     
     return message
 
@@ -39,9 +39,9 @@ def send_message(client):
         request_message = app_pb2.Request_APP()
 
         print("APP MENU:")
-        print("Digite /LIST para ver objetos conectados ao gateaway.")    
+        print("Digite /LIST para ver objetos conectados ao Home Assistant.")    
         print("Digite /SAIR para sair do app.")
-        print("Digite o name do objeto: ")
+        print("Digite o nome do dispositivo para conectar a um dispositivo.\n")
         
         command = input('')
         
@@ -59,7 +59,7 @@ def send_message(client):
         
         elif client.discover_atuator(command)==True:
             lista_comandos = client.discover_comands(command)
-            print(lista_comandos)
+            print('Comandos: ',lista_comandos)
             comando = input('Digite o comando: ')
             request_message = app_pb2.Request_APP()
             if comando in lista_comandos:

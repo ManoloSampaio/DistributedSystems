@@ -6,7 +6,7 @@ import EnvMsg_pb2
 
 def send_data(ambiente):
     while True:
-        time.sleep(2.5)
+        time.sleep(3.5)
         ambiente.sendtemp()
         ambiente.sendumid()
         ambiente.sendlum()
@@ -17,7 +17,7 @@ def add_sensor(ambiente):
         mensagem=connection.recv(1024)
         msg = EnvMsg_pb2.FromSensor()
         msg.ParseFromString(mensagem)
-        ambiente.sensor_dict[f'{msg.type}'].append(connection)
+        ambiente.sensor_dict[msg.type].append(connection)
         communicate_HA(ambiente,msg,1)
         
 def communicate_HA(ambiente,msg,type):
@@ -47,13 +47,9 @@ def listen_atuadores(ambiente,connection):
     while True:
         ambiente.read_message(connection)
 
-def comportamento_natural(ambiente):
-    while True:
-        time.sleep(5)
-        ambiente.variacaoTemperatura()
-        ambiente.variacaoUmidade()
+
         
-ambiente=Ambiente('localhost',50000,30,20,50)
+ambiente=Ambiente('localhost',50000,30,20,40)
 ambiente.ambiente_socket_sensor.bind(('localhost',50000))
 ambiente.ambiente_socket_sensor.listen(1)
 
@@ -65,9 +61,7 @@ ambiente.ambiente_HA_socket.connect(('localhost',42000))
 t_2 = threading.Thread(target = add_sensor,args=(ambiente,))
 t_1 = threading.Thread(target = send_data,args=(ambiente,))
 t_3 = threading.Thread(target = add_atuadores,args=(ambiente,))
-t_4 = threading.Thread(target = comportamento_natural,args=(ambiente,))
 
 t_1.start()
 t_2.start()
 t_3.start()
-t_4.start()

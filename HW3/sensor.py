@@ -18,11 +18,14 @@ class Sensor():
         msg.queue_name = sensor_name
         self.sensor_name = sensor_name
         self.sensor_socket.send(msg.SerializeToString())
-        self.variable = -1        
+        self.variable = -1
+        self.old_variable=-1        
     
     def publish(self):
         if self.variable!=-1:
-            self.channel.basic_publish(exchange='', 
+            if self.variable!=self.old_variable or self.variable==-1:
+                self.old_variable = self.variable
+                self.channel.basic_publish(exchange='', 
                               routing_key=self.sensor_name, 
                               body=f'{self.variable}'
                               )

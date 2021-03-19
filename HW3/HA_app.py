@@ -7,7 +7,6 @@ import grpc
 import HAgrpc_pb2
 import HAgrpc_pb2_grpc
 import EnvMsg_pb2
-import HAmsg_pb2
 import app_pb2
 
 def add_app_users(HA):
@@ -129,25 +128,20 @@ def add_object(connection):
                             msg_response.queue_name,HA,))
         
         if msg_response.type==1:
-            channel = grpc.insecure_channel(f'localhost:{msg_response.grpc_address}',
-                      options=(('grpc.enable_http_proxy', 0),))
+            channel = grpc.insecure_channel(f'localhost:{msg_response.grpc_address}')
             
             HA.object_dict[msg_response.object_name]=channel 
             HA.atuadores.append(msg_response.object_name)
 
 def listen_sensor(channel,queue_name,HA):
-    try:
+    while True:
         channel.basic_consume(
                 queue_name, 
                 lambda ch, method, properties, body: HA.callback_sensor(ch, method, properties, body,
                                                                         queue=queue_name), 
                 auto_ack=True
                 )
-        
-        while True:
-            channel.start_consuming()
-    except:
-        print('Fila Inexistente')    
+        channel.start_consuming()    
         
 
 

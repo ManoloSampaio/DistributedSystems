@@ -15,7 +15,7 @@ def server(obj,grpc_port):
 
 def send_data(obj):
     while True:
-        time.sleep(3)
+        time.sleep(2.5)
         obj.send_data()
 
 dict_1 = {1:'Nivel de umidificacao: ',2:'Temperatura desejada: ',3: 'Potencia de iluminacao: '}

@@ -18,7 +18,6 @@ class Gateway():
         self.client_vector = []
         self.object_dict = {}
         self.sensor_dict = {}
-        self.sensor_dict_values ={}
         self.sensores = []
         self.atuadores= []
         
