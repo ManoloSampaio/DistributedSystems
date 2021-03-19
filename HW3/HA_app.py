@@ -1,4 +1,4 @@
-from gateway import Gateway
+from homeassis import HomeAssistent
 from _thread import *
 import threading 
 import pika
