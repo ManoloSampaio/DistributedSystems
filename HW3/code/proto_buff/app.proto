@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+message Request_APP{
+    RequestType request_type =1;
+    float value = 2;
+    string name = 3;   
+    string aux =4;
+    enum RequestType{
+        ReadStatus = 0;
+        ReadSensor = 1;
+        ModStatus  = 2;
+        ModOnOf=3;
+        DiscoverComands= 4;
+        ListObjects = 5;
+        VerifyActuator = 6;
+        VerifySensor = 7;
+        LogOut =8;
+    }
+}
+message Response_APP{
+    ResponseType response_type=1;
+    string object_name =2;
+    float object_result =3;
+    string list_object= 4;
+    string on_off_status=5;
+    repeated string object_comands =6;
+    enum ResponseType{
+        Status =0;
+        ON_OFF_status=1;
+        Server_Message=2;
+        Object_commands =3;
+    }
+}

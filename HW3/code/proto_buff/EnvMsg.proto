@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+
+
+message ToSensor{
+    float variable=1;
+}
+
+message FromSensor{
+    sensortype type=1;
+    string queue_name=2;
+    enum sensortype{
+        UMID=0;
+        TEMP=1;
+        LUMN=2;
+    }
+}
+
+message FromActuator{
+    actuatortype type=1;
+    float variable=2;
+    string grpc_address =3;
+    string object_name =4;
+    enum actuatortype{
+        UMID=0;
+        TEMP=1;
+        LUMN=2;
+    }
+}
+
+
+message ToHomeAssitent{
+    objecttype type =1;
+    string object_name =2;
+    string queue_name =3;
+    string grpc_address=4;
+    enum objecttype{
+        SENSOR =0;
+        ATUATOR=1;
+    }
+}
+
