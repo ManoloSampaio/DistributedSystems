@@ -1,4 +1,5 @@
 # Distributed Systems
+Repository of works from distributed system subject in UFC 2020.2. 
 ### Students
 * Emmanuel Sampaio
 * Carlos Alfredo 
