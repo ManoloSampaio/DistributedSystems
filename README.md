@@ -1,5 +1,5 @@
 # Distributed Systems
-Homeworks from distributed system subject.
+Homework from distributed system subject.
 ### Students
 * Emmanuel Sampaio
 * Carlos Alfredo 
